@@ -4,7 +4,7 @@
 
 export const environment = {
   // apiUrl: 'local que for o servidor',
-  apiUrl: 'https://clinica-alegre-backend.herokuapp.com/',
+  apiUrl: 'https://clinica-alegre-backend.herokuapp.com',
   production: false
 };
 
