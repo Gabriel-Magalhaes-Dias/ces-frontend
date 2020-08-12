@@ -12,7 +12,7 @@ app.use(cors({
 }));
 
 // Create link to Angular build directory
-var distDir = __dirname + "/dist/ces-frontend"
+var distDir = __dirname + "/dist/frontend"
 app.use(express.static(distDir))
 
 app.get('/*', (req, res) => {
