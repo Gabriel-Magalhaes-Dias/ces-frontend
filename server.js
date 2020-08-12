@@ -1,11 +1,23 @@
-const express = require('express');
+//Install express server
+const express = require('express')
+const bodyParser = require('body-parser')
+const path = require('path')
+const cors = require('cors')
 
-const app = express();
+const app = express()
 
-app.use(express.static('./dist/frontend'));
+app.use(bodyParser.json())
+app.use(cors({
+  credentials: true,
+}));
 
-app.get('/*', (req, res) =>
-  res.sendFile('index.html', { root: 'dist/frontend/' }),
-);
+// Create link to Angular build directory
+var distDir = __dirname + "/dist/ces-frontend"
+app.use(express.static(distDir))
 
-app.listen(process.env.PORT || 8080);
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(distDir + '/index.html'))
+})
+
+// Start the app by listening on the default Heroku port
+app.listen(process.env.PORT || 8080)
