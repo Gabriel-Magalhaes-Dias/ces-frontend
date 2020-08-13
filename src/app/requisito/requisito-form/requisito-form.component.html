@@ -1,22 +1,20 @@
 <div class="title">
-  <button mat-icon-button aria-label="Voltar" [routerLink]="['/backlog']">
-    <mat-icon>arrow_back</mat-icon> Criar Requisito
-  </button>
+  <h1>{{id?'Editar Requisito' : 'Cadastrar Requisito'}}</h1>
 </div>
 <br>
+<mat-card>
 
-
-  <mat-card>
-    <div class="col">
+  <div class="col">
+    <form [formGroup]="requisitoForm">
       <mat-form-field>
         <mat-label>Nome</mat-label>
-        <input matInput [(ngModel)]="requisito.nome">
+        <input matInput formControlName="nome">
       </mat-form-field>
       <br>
       <mat-form-field>
-        <mat-label>Tipo</mat-label>
-        <mat-select>
-          <mat-option value="option">User Story</mat-option>
+        <mat-label>Tipo de Descrição</mat-label>
+        <mat-select [(value)]="tipoDescricao">
+          <mat-option value="user_story">User Story</mat-option>
         </mat-select>
       </mat-form-field>
       <br>
@@ -24,24 +22,44 @@
       <h3>Observações</h3>
       <mat-form-field>
         <mat-label>Observação</mat-label>
-        <input matInput [(ngModel)]="requisito.observacoes">
+        <input matInput formControlName="observacoes">
       </mat-form-field>
-    </div>
+    </form>
+  </div>
 
-    <div class="col">
+
+
+  <div class="col">
+    <form [formGroup]="userStoryForm">
       <h2>User Story</h2>
 
+      Tema
+      <mat-form-field class="input-user-story">
+        <mat-label>Tema</mat-label>
+        <mat-select formControlName="tema">
+          <mat-option value="Tema 1">Tema 1</mat-option>
+          <mat-option value="Tema 2">Tema 2</mat-option>
+          <mat-option value="Tema 3">Tema 3</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <br>
       Como
       <mat-form-field class="input-user-story">
         <mat-label>Ator</mat-label>
-        <mat-select [(ngModel)]="userStory.comoUm">
-          <mat-option value="Ator exemplo">User Story</mat-option>
+        <mat-select formControlName="comoUm">
+          <mat-option value="Ator 1">Ator 1</mat-option>
+          <mat-option value="Ator 2">Ator 2</mat-option>
+          <mat-option value="Ator 3">Ator 3</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="input-user-story">
         <mat-label>Ação</mat-label>
-        <mat-select [(ngModel)]="userStory.acao">
-          <mat-option value="ação exemplo">User Story</mat-option>
+        <mat-select [(value)]="acaoOption">
+          <mat-option value="eu quero ">eu quero</mat-option>
+          <mat-option value="preciso de ">preciso de</mat-option>
+          <mat-option value="gostaria de ">gostaria de</mat-option>
+          <mat-option value="devo ">devo</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -49,21 +67,22 @@
 
       <mat-form-field>
         <mat-label>Descrição da ação</mat-label>
-        <input matInput>
+        <input matInput formControlName="acao">
       </mat-form-field>
       <br>
       Para que seja possível
       <br>
       <mat-form-field>
         <mat-label>Descrição da funcionalidade</mat-label>
-        <input matInput [(ngModel)]="userStory.paraQueSejaPossivel">
+        <input matInput formControlName="paraQueSejaPossivel">
       </mat-form-field>
-
-    </div>
+    </form>
+  </div>
 
 </mat-card>
 
 <div class="actions">
   <button mat-raised-button color="warn" [routerLink]="['/backlog']">Cancelar</button>
-  <button mat-raised-button color="primary" (click)="cadastrar()">Criar</button>
+  <button mat-raised-button color="primary" (click)="cadastrar()"
+    [disabled]="!requisitoForm.valid||!userStoryForm.valid">{{id? 'Editar' : 'Criar'}}</button>
 </div>

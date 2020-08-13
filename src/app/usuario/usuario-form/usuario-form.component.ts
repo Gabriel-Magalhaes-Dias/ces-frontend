@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from 'src/app/core/services/notification.service';
-import { ConfirmDialogComponent, DialogData } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
-import { Validators, FormBuilder } from '@angular/forms';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
+import { ConfirmDialogComponent, DialogData } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { Usuario } from 'src/app/shared/models/usuario';
 
 @Component({
@@ -64,18 +64,18 @@ export class UsuarioFormComponent implements OnInit {
         if (this.id) {
           this.usuarioService.update(this.id, this.usuarioForm.value as Usuario).subscribe(() => {
             this.router.navigate(['/usuarios'])
-            this.notification.success('Administrador atualizado com sucesso')
+            this.notification.success('Usuário atualizado com sucesso')
           },
             () => {
-              this.notification.error('Erro ao atualizar administrador')
+              this.notification.error('Erro ao atualizar usuário')
             })
         } else {
           this.usuarioService.salvar(this.usuarioForm.value as Usuario).subscribe(() => {
             this.router.navigate(['/usuarios'])
-            this.notification.success('Usuario criado com sucesso')
+            this.notification.success('Usuário criado com sucesso')
           },
             () => {
-              this.notification.error('Erro ao criar usuario')
+              this.notification.error('Erro ao criar usuário')
             })
         }
       }

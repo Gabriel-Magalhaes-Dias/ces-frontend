@@ -1,3 +1,4 @@
+import { UserStory } from './../../shared/models/userStory';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { DialogData, ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Requisito } from 'src/app/shared/models/requisito';
 import { RequisitoService } from 'src/app/core/services/requisito.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-requisito-info',
@@ -14,13 +16,17 @@ import { RequisitoService } from 'src/app/core/services/requisito.service';
 })
 export class RequisitoInfoComponent implements OnInit {
 
-  constructor(private titleService: Title, private requisitoSevice: RequisitoService, private routeEntrada: ActivatedRoute, private dialog: MatDialog, private router: Router,private notification: NotificationService) { }
+  constructor(private titleService: Title, private requisitoSevice: RequisitoService, private fb: FormBuilder,
+    private routeEntrada: ActivatedRoute, private dialog: MatDialog, private router: Router,private notification: NotificationService) { }
 
-  requisito : Requisito
+  requisito : Requisito;  
+  tipoDescricao : string;
+  id : number;
 
   ngOnInit(): void {
     this.titleService.setTitle('Informações do Requisito');
-    this.requisitoSevice.get(parseInt(this.routeEntrada.snapshot.paramMap.get('id'))).subscribe(requisito => (this.requisito=requisito));
+    this.id = parseInt(this.routeEntrada.snapshot.paramMap.get('id'));
+    this.requisitoSevice.get(this.id).subscribe(requisito => (this.requisito=requisito));
   }
 
   excluirRequisito(): void{
@@ -33,15 +39,16 @@ export class RequisitoInfoComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, config)
     dialogRef.afterClosed().subscribe((opcao: boolean) => {
       if (opcao) {
-        this.requisitoSevice.deletar(this.requisito.id).subscribe();
+        this.requisitoSevice.deletar(this.id).subscribe();
         this.router.navigate(['/backlog']);
         this.notification.success('Requisito excluido com sucesso');
       }
     })
-
-
-
     
+  }
+
+  editarRequisito(): void{
+    this.router.navigateByUrl('/requisitos/novo/' + this.id);
   }
 
 }

@@ -1,16 +1,16 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core'
-import { MatPaginator } from '@angular/material/paginator'
-import { Usuario } from '../../shared/models/usuario';
-import { Title } from '@angular/platform-browser'
-import { MatSort } from '@angular/material/sort';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { debounceTime, startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { merge, of } from 'rxjs';
-import { DialogData, ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
+import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
+import { NotificationService } from 'src/app/core/services/notification.service';
+import { ConfirmDialogComponent, DialogData } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { UsuarioService } from '../../core/services/usuario.service';
+import { Usuario } from '../../shared/models/usuario';
 
 @Component({
   selector: 'app-usuario-list',
@@ -108,14 +108,14 @@ export class UsuarioListComponent implements OnInit, AfterViewInit {
     const config = {
       data: {
         title: 'Confirmar Exclusão',
-        message: 'Deseja excluir o administrador?'
+        message: 'Deseja excluir o usuário?'
       } as DialogData
     }
     const dialogRef = this.dialog.open(ConfirmDialogComponent, config)
     dialogRef.afterClosed().subscribe((opcao: boolean) => {
       if (opcao) {
         this.usuarioService.excluir(id).subscribe(() => {
-          this.notificationService.success('Usuario excluído com sucesso')
+          this.notificationService.success('Usuário excluído com sucesso')
           this.listarUsuarios()
         })
       }

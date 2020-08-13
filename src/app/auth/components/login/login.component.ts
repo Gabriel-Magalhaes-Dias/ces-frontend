@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/auth/auth.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { User } from '../../user.model';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +23,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthenticationService,
     private fb: FormBuilder,
     private router: Router
-  ) { 
+  ) {
     this.createForm();
   }
 
@@ -43,20 +42,18 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.loginForm.getRawValue)
     this.authService.login(this.loginForm.value).subscribe(
       data => {
-        console.log(data);
         this.isLoginFailed = false;
         this.router.navigate(['/']);
-        
+
       },
       err => {
         this.errorMessage = err.error.message;
         this.alertService.error(this.errorMessage);
         this.isLoginFailed = true;
       }
-      
+
     );
 
     /*

@@ -16,7 +16,17 @@ const routes: Routes = [
       },
       {
         path: 'novo',
-        component: RequisitoFormComponent
+        children: [
+          {
+            path: '',
+            component: RequisitoFormComponent
+          },
+          {
+            path: ':id',
+            component: RequisitoFormComponent
+          }
+        ]
+        
       }
     ]
   }

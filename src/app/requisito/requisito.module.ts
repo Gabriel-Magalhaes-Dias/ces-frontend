@@ -5,7 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { RequisitoFormComponent } from './requisito-form/requisito-form.component';
 import { RequisitoInfoComponent } from './requisito-info/requisito-info.component';
 import { RequisitoRoutingModule } from './requisito-routing.module';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [RequisitoFormComponent, RequisitoInfoComponent],
@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
     RequisitoRoutingModule,
     SharedModule,
     MaterialModule,
-    FormsModule
+    ReactiveFormsModule
   ]
 })
 export class RequisitoModule { }

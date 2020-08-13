@@ -1,67 +1,65 @@
-<h1>Requisito 01</h1>
+<h1>Requisito {{this.id}}</h1>
 
 <button mat-raised-button color="warn" class="voltar" [routerLink]="['/backlog']">Voltar</button>
 
 <mat-card>
 
   <div class="col">
-    <mat-form-field>
-      <mat-label>Requisito 01</mat-label>
-      <input disabled matInput [value]="requisito.nome">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>User Story</mat-label>
-      <mat-select disabled>
-        <mat-option value="option">User Story</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <br>
-    <br>
-    <h3>Observações</h3>
-    <mat-form-field>
-      <mat-label>Observação do caso de requisito 01</mat-label>
-      <input disabled matInput [value]="requisito.observacoes">
-    </mat-form-field>
+      Nome
+      <br>
+      <mat-form-field>
+        <input disabled matInput [(value)]="requisito.nome">
+      </mat-form-field>
+      <br>
+      Forma de Descrição
+      <br>
+      <mat-form-field>
+        <mat-label>User Story</mat-label>
+        <mat-select disabled>
+          <mat-option value="tipoDescricao">User Story</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <br>
+      <h3>Observações</h3>
+      <mat-form-field>
+        <mat-label>Observação do caso de requisito {{this.id}}</mat-label>
+        <input disabled matInput [(value)]="requisito.observacoes">
+      </mat-form-field>
   </div>
 
   <div class="col">
-    <h2>User Story</h2>
+      <h2>User Story</h2>
 
-    Como
-    <mat-form-field class="input-user-story">
-      <mat-label>{{requisito.userStory.comoUm}}</mat-label>
-      <mat-select disabled>
-        
-        <mat-option [value]="requisito.userStory.comoUm">User Story</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="input-user-story">
-      <mat-label>{{requisito.userStory.acao}}</mat-label>
-      <mat-select disabled>
-        <mat-option [value]="requisito.userStory.acao">User Story</mat-option>
-      </mat-select>
-    </mat-form-field>
+      Tema
+      <mat-form-field class="input-user-story">
+        <input disabled matInput [(value)]="requisito.userStory.tema">
+      </mat-form-field>
+      <br>
+      Como
+      <mat-form-field class="input-user-story">
+        <mat-label>Ator desse User Story</mat-label>
+        <input disabled matInput [(value)]="requisito.userStory.comoUm">
+      </mat-form-field>
 
-    <br>
+      <br>
 
-    <mat-form-field>
-      <mat-label>Descrição da ação</mat-label>
-      <input disabled matInput>
-    </mat-form-field>
-    <br>
-    Para que seja possível
-    <br>
-    <mat-form-field>
-      <mat-label>Descrição da funcionalidade</mat-label>
-      <input disabled matInput [value]="requisito.userStory.paraQueSejaPossivel">
-    </mat-form-field>
-
+      <mat-form-field>
+        <mat-label>Descrição da ação</mat-label>
+        <input disabled matInput [(value)]="requisito.userStory.acao">
+      </mat-form-field>
+      <br>
+      Para que seja possível
+      <br>
+      <mat-form-field>
+        <mat-label>Descrição da funcionalidade</mat-label>
+        <input disabled matInput [(value)]="requisito.userStory.paraQueSejaPossivel">
+      </mat-form-field>
   </div>
 
 </mat-card>
 
 <div class="actions">
-  <button mat-raised-button color="warn" [routerLink]="['/backlog']">Editar</button>
+  <button mat-raised-button color="warn" (click)="editarRequisito()">Editar</button>
   <button mat-raised-button color="primary" (click)="excluirRequisito()">Excluir</button>
 </div>
