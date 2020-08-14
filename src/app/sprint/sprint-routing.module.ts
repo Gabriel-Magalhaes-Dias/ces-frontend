@@ -4,11 +4,12 @@ import { LayoutComponent } from '../shared/layout/layout.component';
 import { SprintDetailsComponent } from './sprint-details/sprint-details.component';
 import { SprintFormComponent } from './sprint-form/sprint-form.component';
 import { SprintListComponent } from './sprint-list/sprint-list.component';
+import { AuthGuard } from '../auth/auth.guard';
 
 const routes: Routes = [
   {
     path: 'sprints',
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     component: LayoutComponent,
     children: [
       {
@@ -16,7 +17,11 @@ const routes: Routes = [
         component: SprintListComponent
       },
       {
-        path: 'info',
+        path: 'edit/:id',
+        component: SprintDetailsComponent
+      },
+      {
+        path: 'info/:id',
         component: SprintDetailsComponent
       },
       {
