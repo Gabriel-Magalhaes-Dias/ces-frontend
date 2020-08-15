@@ -12,6 +12,9 @@
           <div class="error" *ngIf="nome.errors.hasnumbers">
             O nome não deve conter números.
           </div>
+          <div class="error" *ngIf="nome.errors.startwithspace">
+            O nome não deve começar com espaço.
+          </div>
         </div>
         <br />
         <mat-form-field>

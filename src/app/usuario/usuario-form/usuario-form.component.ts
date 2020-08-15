@@ -18,7 +18,7 @@ export class UsuarioFormComponent implements OnInit {
   editarUsuario = false
 
   usuarioForm = this.fb.group({
-    nome: ['', [Validators.required, this.noNumberValidator]],
+    nome: ['', [Validators.required, this.noNumberValidator, this.startWithSpace]],
     username: ['', [Validators.required, Validators.minLength(4) , this.noWhitespaceValidator]],
     password: ['', Validators.required],
     enabled: ['']
@@ -92,6 +92,12 @@ export class UsuarioFormComponent implements OnInit {
     const input: string = control.value;
     const hasWhitespace = input.match(' ');
     return hasWhitespace ? { 'whitespace': true } : null;
+  }
+
+  startWithSpace(control: FormControl) {
+    const input: string = control.value;
+    const startWithSpace = input.charAt(0).match(' ');
+    return startWithSpace ? { 'startwithspace': true } : null;
   }
 
   get nome() {return this.usuarioForm.get('nome')}
