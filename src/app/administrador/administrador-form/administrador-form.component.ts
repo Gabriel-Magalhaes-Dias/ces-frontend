@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,8 +18,8 @@ export class AdministradorFormComponent implements OnInit {
   editarAdministrador = false
 
   administradorForm = this.fb.group({
-    nome: ['', [Validators.required, this.noWhitespaceValidator, Validators.minLength(4)]],
-    username: ['', [Validators.required, this.noWhitespaceValidator, Validators.minLength(4)]],
+    nome: ['', [Validators.required, this.noNumberValidator]],
+    username: ['', [Validators.required, Validators.minLength(4) , this.noWhitespaceValidator]],
     password: ['', Validators.required],
     enabled: ['']
   })
@@ -46,10 +46,16 @@ export class AdministradorFormComponent implements OnInit {
 
   }
 
-  public noWhitespaceValidator(control: AbstractControl) {
-    const isWhitespace = (control.value || '').trim().length === 0;
-    const isValid = !isWhitespace;
-    return isValid ? null : { 'whitespace': true };
+  noNumberValidator(control: FormControl) {
+    const input: string = control.value;
+    const hasNumbers = input.match(/(\d+)/);
+    return hasNumbers ? { 'hasnumbers': true } : null;
+  }
+
+  noWhitespaceValidator(control: FormControl) {
+    const input: string = control.value;
+    const hasWhitespace = input.match(' ');
+    return hasWhitespace ? { 'whitespace': true } : null;
   }
 
   onSubmit() {
@@ -88,6 +94,9 @@ export class AdministradorFormComponent implements OnInit {
       }
     })
   }
+
+  get nome() {return this.administradorForm.get('nome')}
+  get username() {return this.administradorForm.get('username')}
 
   updateAdministrador(administrador: Administrador) {
     this.administradorForm.patchValue({

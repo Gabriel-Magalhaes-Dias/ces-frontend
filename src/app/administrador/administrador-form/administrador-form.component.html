@@ -8,16 +8,23 @@
           <mat-label>Nome</mat-label>
           <input matInput formControlName="nome">
         </mat-form-field>
-        <div class="error" *ngIf="administradorForm.controls.nome.errors">
-          Nome deve conter ao menos 4 caracteres.
+        <div *ngIf="nome.invalid && (nome.dirty || nome.touched)">
+          <div class="error" *ngIf="nome.errors.hasnumbers">
+            O nome não deve conter números.
+          </div>
         </div>
         <br>
         <mat-form-field>
           <mat-label>Login</mat-label>
           <input matInput formControlName="username">
         </mat-form-field>
-        <div class="error" *ngIf="administradorForm.controls.username.errors">
-          Login deve conter ao menos 4 caracteres.
+        <div *ngIf="username.invalid && (username.dirty || username.touched)">
+          <div class="error" *ngIf="username.errors.whitespace">
+            O login não deve conter espaços.
+          </div>
+          <div class="error" *ngIf="username.errors.minlength">
+            Login deve conter ao menos 4 caracteres.
+          </div>
         </div>
       </div>
 

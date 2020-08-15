@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,8 +18,8 @@ export class UsuarioFormComponent implements OnInit {
   editarUsuario = false
 
   usuarioForm = this.fb.group({
-    nome: ['', Validators.required],
-    username: ['', Validators.required],
+    nome: ['', [Validators.required, this.noNumberValidator]],
+    username: ['', [Validators.required, Validators.minLength(4) , this.noWhitespaceValidator]],
     password: ['', Validators.required],
     enabled: ['']
   })
@@ -81,6 +81,21 @@ export class UsuarioFormComponent implements OnInit {
       }
     })
   }
+
+  noNumberValidator(control: FormControl) {
+    const input: string = control.value;
+    const hasNumbers = input.match(/(\d+)/);
+    return hasNumbers ? { 'hasnumbers': true } : null;
+  }
+
+  noWhitespaceValidator(control: FormControl) {
+    const input: string = control.value;
+    const hasWhitespace = input.match(' ');
+    return hasWhitespace ? { 'whitespace': true } : null;
+  }
+
+  get nome() {return this.usuarioForm.get('nome')}
+  get username() {return this.usuarioForm.get('username')}
 
   updateUsuario(usuario: Usuario) {
     this.usuarioForm.patchValue({
