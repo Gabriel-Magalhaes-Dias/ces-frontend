@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,8 +18,8 @@ export class AdministradorFormComponent implements OnInit {
   editarAdministrador = false
 
   administradorForm = this.fb.group({
-    nome: ['', Validators.required],
-    username: ['', Validators.required],
+    nome: ['', [Validators.required, this.noWhitespaceValidator, Validators.minLength(4)]],
+    username: ['', [Validators.required, this.noWhitespaceValidator, Validators.minLength(4)]],
     password: ['', Validators.required],
     enabled: ['']
   })
@@ -46,7 +46,14 @@ export class AdministradorFormComponent implements OnInit {
 
   }
 
+  public noWhitespaceValidator(control: AbstractControl) {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true };
+  }
+
   onSubmit() {
+    console.log(this.administradorForm)
     this.cadastrar()
   }
 

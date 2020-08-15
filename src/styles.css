@@ -17,6 +17,10 @@ h1 {
   margin: 10px 20px;
 }
 
+.error {
+  color: #ff0000;
+}
+
 .spinner {
   left: 49%;
   position: fixed !important;

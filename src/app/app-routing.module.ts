@@ -6,6 +6,7 @@ import { AuthGuard } from './auth/auth.guard';
 const routes: Routes = [
   {
     path: 'administradores',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./administrador/administrador.module').then(m => m.AdministradorModule)
   },
   {
@@ -15,14 +16,17 @@ const routes: Routes = [
   },
   {
     path: 'requisito',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./requisito/requisito.module').then(m => m.RequisitoModule)
   },
   {
     path: 'sprints',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./sprint/sprint.module').then(m => m.SprintModule)
   },
   {
     path: 'usuarios',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./usuario/usuario.module').then(m => m.UsuarioModule)
   },
   {
