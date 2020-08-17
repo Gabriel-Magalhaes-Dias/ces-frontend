@@ -7,9 +7,10 @@ import { UsuarioListComponent } from './usuario-list/usuario-list.component';
 import { UsuarioRoutingModule } from './usuario-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { UsuarioPerfilComponent } from './usuario-perfil/usuario-perfil.component';
 
 @NgModule({
-  declarations: [UsuarioListComponent, UsuarioFormComponent],
+  declarations: [UsuarioListComponent, UsuarioFormComponent, UsuarioPerfilComponent],
   imports: [
     CommonModule,
     UsuarioRoutingModule,

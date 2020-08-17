@@ -4,10 +4,11 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { MaterialModule } from '../material.module'
 import { SharedModule } from '../shared/shared.module'
 import { BacklogHomeComponent } from './backlog-home/backlog-home.component'
-import { BacklogRoutingModule } from './backlog-routing.module'
+import { BacklogRoutingModule } from './backlog-routing.module';
+import { BacklogClienteComponent } from './backlog-cliente/backlog-cliente.component'
 
 @NgModule({
-  declarations: [BacklogHomeComponent],
+  declarations: [BacklogHomeComponent, BacklogClienteComponent],
   imports: [
     CommonModule,
     SharedModule,

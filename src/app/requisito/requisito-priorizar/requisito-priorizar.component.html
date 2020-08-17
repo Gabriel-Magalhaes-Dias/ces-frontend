@@ -1,0 +1,74 @@
+<h1>Requisito {{this.id}}</h1>
+
+<button mat-raised-button color="warn" class="voltar" [routerLink]="['/backlog']">Voltar</button>
+
+<mat-card>
+
+  <div class="col">
+    Nome
+    <br>
+    <mat-form-field>
+      <input disabled matInput [(value)]="requisito.nome">
+    </mat-form-field>
+    <br>
+    Forma de Descrição
+    <br>
+    <mat-form-field>
+      <mat-label>User Story</mat-label>
+      <mat-select disabled>
+        <mat-option value="tipoDescricao">User Story</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <br>
+    <h3>Observações</h3>
+    <mat-form-field>
+      <mat-label>Observação do caso de requisito {{this.id}}</mat-label>
+      <input disabled matInput [(value)]="requisito.observacoes">
+    </mat-form-field>
+  </div>
+
+  <div class="col">
+    <h2>User Story</h2>
+
+    Tema
+    <mat-form-field class="input-user-story">
+      <input disabled matInput [(value)]="requisito.userStory.tema">
+    </mat-form-field>
+    <br>
+    Como
+    <mat-form-field class="input-user-story">
+      <mat-label>Ator desse User Story</mat-label>
+      <input disabled matInput [(value)]="requisito.userStory.comoUm">
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+      <mat-label>Descrição da ação</mat-label>
+      <input disabled matInput [(value)]="requisito.userStory.acao">
+    </mat-form-field>
+    <br>
+    Para que seja possível
+    <br>
+    <mat-form-field>
+      <mat-label>Descrição da funcionalidade</mat-label>
+      <input disabled matInput [(value)]="requisito.userStory.paraQueSejaPossivel">
+    </mat-form-field>
+  </div>
+
+</mat-card>
+
+<br>
+
+<mat-card>
+  <form [formGroup]="priorizarForm">
+    <mat-form-field>
+      <mat-label>Prioridade</mat-label>
+      <input matInput type="number" formControlName="prioridade">
+    </mat-form-field>
+    <div class="actions">
+      <button mat-raised-button color="warn" (click)="priorizar()">Priorizar</button>
+    </div>
+  </form>
+</mat-card>

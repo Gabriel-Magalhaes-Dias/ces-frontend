@@ -1,11 +1,5 @@
 <h1 class="mat-headline">Backlog</h1>
 
-<div class="buttons">
-  <button mat-raised-button color="primary" [routerLink]="['/sprints']">Sprints</button>
-
-  <button mat-raised-button color="primary" [routerLink]="['/requisitos/novo']">Novo Requisito</button>
-</div>
-
 <div class="actions">
 
   <form [formGroup]="filtrosListagem">
@@ -87,8 +81,8 @@
         Estado: Verificado
       </p>
     </div>
-    <!-- <div class="col action">
-      <button mat-raised-button color="warn">Anexos</button>
-    </div> -->
+    <div class="col action">
+      <button mat-raised-button color="warn" (click)="estimar(requisito.id)">Estimar</button>
+    </div>
   </mat-card-content>
 </mat-card>

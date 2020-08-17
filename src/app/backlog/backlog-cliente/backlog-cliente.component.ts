@@ -6,11 +6,11 @@ import { debounceTime } from 'rxjs/internal/operators/debounceTime';
 import { BacklogService } from 'src/app/core/services/backlog.service';
 
 @Component({
-  selector: 'app-backlog-home',
-  templateUrl: './backlog-home.component.html',
-  styleUrls: ['./backlog-home.component.css']
+  selector: 'app-backlog-cliente',
+  templateUrl: './backlog-cliente.component.html',
+  styleUrls: ['./backlog-cliente.component.css']
 })
-export class BacklogHomeComponent implements OnInit {
+export class BacklogClienteComponent implements OnInit {
 
   config = {
     numeroSprint: "",
@@ -60,6 +60,10 @@ export class BacklogHomeComponent implements OnInit {
 
   openRequisitoDetails(id: number): void {
     this.router.navigateByUrl('/requisitos/info/' + id);
+  }
+
+  estimar(id: number): void {
+    this.router.navigateByUrl('/requisitos/estimar/' + id)
   }
 
   resetarConsulta(): void {

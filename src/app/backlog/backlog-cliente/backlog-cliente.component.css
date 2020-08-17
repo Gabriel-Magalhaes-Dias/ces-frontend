@@ -1,0 +1,59 @@
+.buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  margin-right: 30px;
+}
+
+.buttons button {
+  margin-right: 30px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.search-item {
+  margin: 0 20px;
+}
+
+mat-card {
+  margin: 20px 0;
+}
+
+mat-card:hover {
+  transform: scale(1.007);
+  -moz-transform: scale(1.007);
+	-webkit-transform: scale(1.007);
+}
+
+mat-card .subtitle {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.create {
+  text-align: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.col {
+  min-width: 200px;
+  margin-right: 20px;
+  flex: 2;
+}
+
+.action {
+  flex: 1;
+  text-align: center;
+}

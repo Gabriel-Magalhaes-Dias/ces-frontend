@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth/auth.guard';
 import { LayoutComponent } from '../shared/layout/layout.component';
 import { RequisitoFormComponent } from './requisito-form/requisito-form.component';
 import { RequisitoInfoComponent } from './requisito-info/requisito-info.component';
-import { AuthGuard } from '../auth/auth.guard';
+import { RequisitoPriorizarComponent } from './requisito-priorizar/requisito-priorizar.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,10 @@ const routes: Routes = [
             component: RequisitoFormComponent
           }
         ]
-        
+      },
+      {
+        path: 'estimar/:id',
+        component: RequisitoPriorizarComponent
       }
     ]
   }
