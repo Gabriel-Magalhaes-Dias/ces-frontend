@@ -3,9 +3,9 @@
 </div>
 <br>
 <mat-card>
+  <form [formGroup]="requisitoForm">
+    <div class="col">
 
-  <div class="col">
-    <form [formGroup]="requisitoForm">
       <mat-form-field>
         <mat-label>Nome</mat-label>
         <input matInput formControlName="nome">
@@ -24,13 +24,9 @@
         <mat-label>Observação</mat-label>
         <input matInput formControlName="observacoes">
       </mat-form-field>
-    </form>
-  </div>
+    </div>
 
-
-
-  <div class="col">
-    <form [formGroup]="userStoryForm">
+    <div class="col" formGroupName="userStory">
       <h2>User Story</h2>
 
       Tema
@@ -76,13 +72,12 @@
         <mat-label>Descrição da funcionalidade</mat-label>
         <input matInput formControlName="paraQueSejaPossivel">
       </mat-form-field>
-    </form>
-  </div>
-
+    </div>
+  </form>
 </mat-card>
 
 <div class="actions">
   <button mat-raised-button color="warn" [routerLink]="['/backlog']">Cancelar</button>
   <button mat-raised-button color="primary" (click)="cadastrar()"
-    [disabled]="!requisitoForm.valid||!userStoryForm.valid">{{id? 'Editar' : 'Criar'}}</button>
+    [disabled]="!requisitoForm.valid">{{id? 'Editar' : 'Criar'}}</button>
 </div>

@@ -1,7 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout'
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
-import { SpinnerService } from 'src/app/core/services/spinner.service'
 import { AuthenticationService } from 'src/app/auth/auth.service'
+import { SpinnerService } from 'src/app/core/services/spinner.service'
 
 @Component({
   selector: 'app-layout',
@@ -29,14 +29,16 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.authenticationService.user.subscribe( user => {this.username = user.username;});
+    this.authenticationService.user.subscribe(user => {
+      this.username = user.username;
+    });
   }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  logout() : void{
+  logout(): void {
     this.authenticationService.logout();
     window.location.reload();
   }

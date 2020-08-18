@@ -51,19 +51,19 @@
 <mat-card (click)="openRequisitoDetails(requisito.id)" *ngFor="let requisito of requisitos">
   <mat-card-header>
     <mat-card-title>
-      {{ requisito.requisito.nome }}
-      <span class="subtitle"> - Sprint {{ requisito.sprint.numeroSprint }}</span>
+      {{ requisito.nome }}
+      <span class="subtitle"> - Sprint {{ requisito.numeroSprint }}</span>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content style="margin-left: 15px" class="card">
     <div class="col">
       <p>
-        Prioridade: {{ requisito.requisito.prioridade }}
+        Prioridade: {{ requisito.prioridade }}
       </p>
     </div>
     <div class="col">
       <p>
-        Idade: {{ requisito.requisito.idade }}
+        Idade: {{ requisito.idade }}
       </p>
     </div>
     <div class="col">
@@ -78,7 +78,7 @@
     </div>
     <div class="col">
       <p>
-        Estado: Verificado
+        Estado: {{ requisito.estado }}
       </p>
     </div>
     <div class="col action">
