@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: 'requisitos',
     canActivate: [AuthGuard],
-    component: LayoutComponent,
+    //component: LayoutComponent,
     children: [
       {
         path: 'info/:id',

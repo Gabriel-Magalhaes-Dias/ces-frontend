@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: 'administradores',
     canActivate: [AuthGuard],
-    component: LayoutComponent,
+    //component: LayoutComponent,
     children: [
       {
         path: '',

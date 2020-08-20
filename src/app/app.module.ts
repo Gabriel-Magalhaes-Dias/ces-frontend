@@ -13,10 +13,16 @@ import { RequisitoModule } from './requisito/requisito.module'
 import { SharedModule } from './shared/shared.module'
 import { SprintModule } from './sprint/sprint.module'
 import { UsuarioModule } from './usuario/usuario.module'
+import { HeaderComponent } from './shared/layout/header/header.component';
+import { FooterComponent } from './shared/layout/footer/footer.component';
+import { NavComponent } from './shared/layout/nav/nav.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,
