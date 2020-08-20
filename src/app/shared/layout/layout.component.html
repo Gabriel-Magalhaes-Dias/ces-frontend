@@ -1,4 +1,4 @@
-<div class="navigation" [class.is-mobile]="mobileQuery.matches">
+<!-- <div class="navigation" [class.is-mobile]="mobileQuery.matches">
 
   <mat-toolbar class="toolbar" color="primary">
 
@@ -10,7 +10,7 @@
 
     <span class="toolbar-spacer"></span>
 
-    <!-- <button mat-icon-button [matMenuTriggerFor]="notificationMenu">
+    <button mat-icon-button [matMenuTriggerFor]="notificationMenu">
       <mat-icon matBadge="" matBadgeColor="accent">notifications</mat-icon>
     </button>
     <mat-menu #notificationMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
@@ -20,7 +20,8 @@
       <a mat-menu-item>
         <span>Você tem uma nova mensagem</span>
       </a>
-    </mat-menu> -->
+    </mat-menu>
+
 
     <button mat-button [matMenuTriggerFor]="userMenu">
       <mat-icon>person</mat-icon>
@@ -87,22 +88,23 @@
           <p mat-line> Visualizar Backlog </p>
         </a>
 
-        <!--
+
         <a id="push-bottom" mat-list-item>
           <mat-icon mat-list-icon>
             bug_report
           </mat-icon>
           <p mat-line> Reportar Problema </p>
         </a>
-        -->
+
       </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
 
       <div class="progress-bar-container">
-        <!--<mat-progress-bar color="accent" mode="indeterminate" *ngIf="spinnerService.visibility | async">
-        </mat-progress-bar>-->
+<mat-progress-bar color="accent" mode="indeterminate" *ngIf="spinnerService.visibility | async">
+        </mat-progress-bar>
+
         <mat-spinner class="spinner" [diameter]="50" *ngIf="showSpinner"></mat-spinner>
       </div>
 
@@ -114,4 +116,4 @@
 
   </mat-sidenav-container>
 
-</div>
+</div> -->

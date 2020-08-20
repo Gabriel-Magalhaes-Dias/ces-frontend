@@ -1,4 +1,4 @@
-import { MediaMatcher } from '@angular/cdk/layout'
+/* import { MediaMatcher } from '@angular/cdk/layout'
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
 import { AuthenticationService } from 'src/app/auth/auth.service'
 import { SpinnerService } from 'src/app/core/services/spinner.service'
@@ -44,3 +44,4 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
 
 }
+ */

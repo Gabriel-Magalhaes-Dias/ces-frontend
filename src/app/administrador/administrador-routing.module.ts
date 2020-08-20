@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LayoutComponent } from '../shared/layout/layout.component';
 import { AdministradorFormComponent } from './administrador-form/administrador-form.component';
 import { AdministradorListComponent } from './administrador-list/administrador-list.component';
 import { AuthGuard } from '../auth/auth.guard';
