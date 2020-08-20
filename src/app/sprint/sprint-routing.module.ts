@@ -17,7 +17,11 @@ const routes: Routes = [
         component: SprintListComponent
       },
       {
-        path: 'info',
+        path: 'edit/:id',
+        component: SprintDetailsComponent
+      },
+      {
+        path: 'info/:id',
         component: SprintDetailsComponent
       },
       {

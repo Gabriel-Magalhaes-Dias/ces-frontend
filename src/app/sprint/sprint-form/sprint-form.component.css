@@ -16,6 +16,12 @@ mat-card {
   text-align: center;
 }
 
+.form {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+}
+
 .card {
   display: flex;
   flex-direction: row;
@@ -27,6 +33,10 @@ mat-card {
   flex-direction: column;
   width: 200px;
   margin-right: 20px;
+}
+
+.btn {
+  height: 40px;
 }
 
 .action {

@@ -1,0 +1,13 @@
+<mat-card (click)="openSpringDetails()">
+    <div class="item">
+      Sprint {{sprint.numeroSprint}}
+    </div>
+    <div class="item">
+      Estado: {{sprint.estado}}
+    </div>
+    <div class="item">
+      Data de criação: {{sprint.dataInicio | date: 'dd/MM/yyyy'}}
+    </div>
+    <div class="item">Data de entrega: {{sprint.dataFim | date: 'dd/MM/yyyy'}}
+    </div>
+  </mat-card>

@@ -1,18 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Requisito } from 'src/app/shared/models/requisito';
-import { environment } from '../../../environments/environment';
+import { Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class RequisitoService {
 
-  private requisitoUrl: string = `${environment.apiUrl}/requisitos`
+  private requisitoUrl: string = `${environment.apiUrl}/requisitos`;
 
   constructor(private http: HttpClient) { }
+
+  public getRequisitosByEstado(estado: string): Observable<Requisito[]> {
+    return this.http.get<Requisito[]>(`${this.requisitoUrl}/estado/${estado}`);
+  }
 
   salvar(requisito: Requisito): Observable<Requisito> {
     return this.http.post<Requisito>(this.requisitoUrl, requisito);

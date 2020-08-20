@@ -1,0 +1,18 @@
+mat-card {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  mat-card:hover {
+    transform: scale(1.007);
+    -moz-transform: scale(1.007);
+      -webkit-transform: scale(1.007);
+  }
+  
+  .item {
+    flex-direction: column;
+    width: 300px;
+    margin-right: 20px;
+  }

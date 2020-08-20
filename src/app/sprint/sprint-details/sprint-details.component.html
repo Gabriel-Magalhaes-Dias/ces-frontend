@@ -18,74 +18,11 @@
 </div>
 
 <mat-card class="info">
-  <span>Data início: 01/07/2020</span>
-  <span>Data entrega: 15/07/2020</span>
-  <span>Estado: Entregue</span>
-  <span>Valor entregue ao negócio: blablablablablabla</span>
+  <span>Data início: {{sprint.dataInicio | date: 'dd/mm/yyyy'}}</span>
+  <span>Data entrega: {{sprint.dataFim | date: 'dd/mm/yyyy'}}</span>
+  <span>Estado: {{sprint.estado}}</span>
+  <span>Valor entregue ao negócio: {{sprint.valorEntregueAoNegocio}}</span>
 </mat-card>
 
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Requisito 01</mat-card-title>
-  </mat-card-header>
-  <mat-card-content style="margin-left: 15px" class="card">
-    <div class="col">
-      <p>
-        Prioridade: 90
-      </p>
-    </div>
-    <div class="col">
-      <p>
-        Idade: 4
-      </p>
-    </div>
-    <div class="col">
-      <p>
-        Estimativa: 8
-      </p>
-    </div>
-    <div class="col">
-      <p>
-        Autor: Jeremias
-      </p>
-    </div>
-    <div class="col">
-      <p>
-        Data Entrega: 09/09/2020
-      </p>
-    </div>
-  </mat-card-content>
-</mat-card>
-
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Requisito 01</mat-card-title>
-  </mat-card-header>
-  <mat-card-content style="margin-left: 15px" class="card">
-    <div class="col">
-      <p>
-        Prioridade: 90
-      </p>
-    </div>
-    <div class="col">
-      <p>
-        Idade: 4
-      </p>
-    </div>
-    <div class="col">
-      <p>
-        Estimativa: 8
-      </p>
-    </div>
-    <div class="col">
-      <p>
-        Autor: Jeremias
-      </p>
-    </div>
-    <div class="col">
-      <p>
-        Data Entrega: 09/09/2020
-      </p>
-    </div>
-  </mat-card-content>
-</mat-card>
+<app-requisitos-sprint [requisitos]="sprint.entregas" [checkbox]="false">
+</app-requisitos-sprint>

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ConfirmDialogComponent, DialogData } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
+import { SprintService } from 'src/app/core/services/sprint.service';
+import { Sprint } from 'src/app/shared/models/sprint';
 
 @Component({
   selector: 'app-sprint-details',
@@ -11,10 +13,22 @@ import { ConfirmDialogComponent, DialogData } from 'src/app/shared/confirm-dialo
 })
 export class SprintDetailsComponent implements OnInit {
 
-  constructor(private dialog: MatDialog, private router: Router, private titleService: Title) { }
+  idSprint: string;
+  sprint: Sprint;
+
+  constructor(
+    private route: ActivatedRoute,
+    private dialog: MatDialog, 
+    private router: Router, 
+    private titleService: Title,
+    private sprintService: SprintService
+  ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('Informações da Sprint');
+    this.idSprint = this.route.snapshot.params.id;
+    this.sprintService.get(this.idSprint)
+      .subscribe(sprint => this.sprint = sprint)
   }
 
   iniciarSprint(): void {

@@ -4,6 +4,11 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent, DialogData } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { NotificationService } from '../../core/services/notification.service';
+import { SprintService } from '../../core/services/sprint.service';
+import { Requisito } from 'src/app/shared/models/requisito';
+import { Sprint } from 'src/app/shared/models/sprint';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { RequisitoService } from 'src/app/core/services/requisito.service';
 
 @Component({
   selector: 'app-sprint-form',
@@ -12,13 +17,37 @@ import { NotificationService } from '../../core/services/notification.service';
 })
 export class SprintFormComponent implements OnInit {
 
-  constructor(private dialog: MatDialog, private notification: NotificationService, private router: Router, private titleService: Title) { }
+  sprintForm: FormGroup;
+  requisitos: Requisito[] = [];
+  requisitosSelecionado: Requisito[] = [];
+
+  constructor(
+    private dialog: MatDialog,
+    private fb: FormBuilder,
+    private notification: NotificationService,
+    private router: Router,
+    private titleService: Title,
+    private requisitoService: RequisitoService,
+    private sprintService: SprintService,
+  ) {
+    this.createForm();
+  }
 
   ngOnInit(): void {
     this.titleService.setTitle('Nova Sprint');
+    this.requisitoService.getRequisitosByEstado('novo')
+      .subscribe(requisitos => this.requisitos = requisitos)
   }
 
-  cadastrar(): void {
+  createForm() {
+    this.sprintForm = this.fb.group({
+      valorEntregueAoNegocio: ['', Validators.required],
+      dataInicio: ['', Validators.required],
+      dataFim: ['', Validators.required],
+    });
+  }
+
+  onSubmit(): void {
     const config = {
       data: {
         title: 'Confirmação',
@@ -28,10 +57,38 @@ export class SprintFormComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, config)
     dialogRef.afterClosed().subscribe((opcao: boolean) => {
       if (opcao) {
-        this.router.navigate(['/backlog'])
-        this.notification.success('Sprint criada com sucesso')
+        this.sprintService.salvar(this.getSprint())
+          .subscribe(sprint => {
+            this.router.navigate(['/backlog'])
+            this.notification.success('Sprint criada com sucesso')
+          }, err => {
+            console.log(err);
+            this.notification.error(err);
+          })
       }
     })
+  }
+
+  setRequisitosSelecionados(requisitos: Requisito[]) {
+    this.requisitosSelecionado = requisitos;
+  }
+
+  get valorEntregueAoNegocio() {
+    return this.sprintForm.get('valorEntregueAoNegocio').value;
+  }
+  
+
+  getSprint(): Sprint {
+    return {
+      estado: 'nova',
+      numeroSprint: 1,
+      dataInicio: new Date,
+      dataFim: new Date,
+      valorEntregueAoNegocio: this.valorEntregueAoNegocio,
+      valorAprovadoCliente: false,
+      entregas: this.requisitosSelecionado,
+      requisitosIds: this.requisitosSelecionado.map(requisito => requisito.id),
+    }
   }
 
 }

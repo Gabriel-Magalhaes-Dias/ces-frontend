@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { Sprint } from 'src/app/shared/models/sprint';
+import { SprintService } from 'src/app/core/services/sprint.service';
 
 @Component({
   selector: 'app-sprint-list',
@@ -9,14 +11,18 @@ import { Router } from '@angular/router';
 })
 export class SprintListComponent implements OnInit {
 
-  constructor(private router: Router, private titleService: Title) { }
+  sprints: Sprint[]
+
+  constructor(
+    private sprintService: SprintService,
+    private titleService: Title
+  ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('Sprints');
+    this.sprintService.getSprints()
+      .subscribe(sprints => {
+        this.sprints = sprints
+      });
   }
-
-  openSpringDetails(): void {
-    this.router.navigate(['/sprint-info'])
-  }
-
 }
