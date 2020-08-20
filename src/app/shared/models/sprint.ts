@@ -9,4 +9,5 @@ export interface Sprint {
     valorEntregueAoNegocio: string,
     valorAprovadoCliente: boolean,
     entregas: Requisito[];
+    requisitosIds?: number[];
 }

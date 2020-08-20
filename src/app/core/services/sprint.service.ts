@@ -9,13 +9,12 @@ import { Sprint } from '../../shared/models/sprint';
 })
 export class SprintService {
 
-  private requisitoUrl: string = `${environment.apiUrl}/sprint`;
+  private requisitoUrl: string = `${environment.apiUrl}/sprints`;
 
   constructor(private http: HttpClient) { }
 
   salvar(sprint: Sprint): Observable<Sprint> {
-    return of(sprint);
-    //return this.http.post<Sprint>(this.requisitoUrl, sprint);
+    return this.http.post<Sprint>(this.requisitoUrl, sprint);
   }
 
   get(id: string): Observable<Sprint> {

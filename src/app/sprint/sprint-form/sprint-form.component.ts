@@ -35,7 +35,7 @@ export class SprintFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('Nova Sprint');
-    this.requisitoService.getRequisitosEstadoNovo()
+    this.requisitoService.getRequisitosByEstado('novo')
       .subscribe(requisitos => this.requisitos = requisitos)
   }
 
@@ -59,10 +59,10 @@ export class SprintFormComponent implements OnInit {
       if (opcao) {
         this.sprintService.salvar(this.getSprint())
           .subscribe(sprint => {
-            console.log(sprint);
             this.router.navigate(['/backlog'])
             this.notification.success('Sprint criada com sucesso')
           }, err => {
+            console.log(err);
             this.notification.error(err);
           })
       }
@@ -87,6 +87,7 @@ export class SprintFormComponent implements OnInit {
       valorEntregueAoNegocio: this.valorEntregueAoNegocio,
       valorAprovadoCliente: false,
       entregas: this.requisitosSelecionado,
+      requisitosIds: this.requisitosSelecionado.map(requisito => requisito.id),
     }
   }
 

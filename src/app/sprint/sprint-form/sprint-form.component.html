@@ -5,7 +5,7 @@
 </div>
 <br />
 
-<div class="search">
+<!-- <div class="search">
   <div class="search-item">
     Filtrar:
 
@@ -27,7 +27,8 @@
       </mat-select>
     </mat-form-field>
   </div>
-</div>
+</div> -->
+
 <mat-card>
   <form class="form" [formGroup]="sprintForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="col">
@@ -44,22 +45,31 @@
 
     <mat-form-field class="col">
       <mat-label>Data de entrega</mat-label>
-      <input matInput [matDatepicker]="picker2" />
+      <input matInput [matDatepicker]="picker2" formControlName="dataFim" />
       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
       <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="col">
       <mat-label>Valor entregue ao negócio</mat-label>
-      <input matInput placeholder="" value="" />
+      <input matInput formControlName="valorEntregueAoNegocio" />
     </mat-form-field>
 
-    <button class="col btn" type="submit" mat-raised-button color="primary">Criar</button>
+    <button
+      class="col btn"
+      type="submit"
+      [disabled]="!sprintForm.valid"
+      mat-raised-button
+      color="primary"
+    >
+      Criar
+    </button>
   </form>
 </mat-card>
 
 <app-requisitos-sprint
   [requisitos]="requisitos"
   [checkbox]="true"
-  (requisitosSelecionados)="setRequisitosSelecionados($event)">
+  (requisitosSelecionados)="setRequisitosSelecionados($event)"
+>
 </app-requisitos-sprint>

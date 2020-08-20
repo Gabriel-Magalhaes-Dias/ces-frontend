@@ -13,8 +13,8 @@ export class RequisitoService {
 
   constructor(private http: HttpClient) { }
 
-  public getRequisitosEstadoNovo(): Observable<Requisito[]> {
-    return of([{ nome: 'Requisito 01' }, { nome: 'Requisito 02' }]);
+  public getRequisitosByEstado(estado: string): Observable<Requisito[]> {
+    return this.http.get<Requisito[]>(`${this.requisitoUrl}/estado/${estado}`);
   }
 
   salvar(requisito: Requisito): Observable<Requisito> {

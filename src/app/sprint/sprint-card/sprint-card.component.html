@@ -6,21 +6,8 @@
       Estado: {{sprint.estado}}
     </div>
     <div class="item">
-      Data criação: {{sprint.dataInicio | date: 'dd/MM/yyyy'}}
+      Data de criação: {{sprint.dataInicio | date: 'dd/MM/yyyy'}}
     </div>
-    <div class="item">{{sprint.dataFim | date: 'dd/MM/yyyy'}}
-    </div>
-    <div class="item">
-      <button mat-icon-button (click)="openSpringDetails()">
-        <mat-icon>
-          info
-        </mat-icon>
-      </button>
-      &nbsp;
-      <button mat-icon-button (click)="configureSprint()">
-        <mat-icon>
-          settings
-        </mat-icon>
-      </button>
+    <div class="item">Data de entrega: {{sprint.dataFim | date: 'dd/MM/yyyy'}}
     </div>
   </mat-card>
