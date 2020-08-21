@@ -15,6 +15,14 @@
         />
         <mat-error *ngIf="nome.invalid">Nome inválido</mat-error>
       </mat-form-field>
+      <div *ngIf="nome.invalid && (nome.dirty || nome.touched)">
+        <div class="error" *ngIf="nome.errors.hasnumbers">
+          O nome não deve conter números.
+        </div>
+        <div class="error" *ngIf="nome.errors.startwithspace">
+          O nome não deve começar com espaço.
+        </div>
+      </div> 
         <mat-form-field>
           <mat-label for="username">Nome de usuário</mat-label>
           <input
@@ -26,6 +34,14 @@
           />
           <mat-error *ngIf="username.invalid">Username inválido</mat-error>
         </mat-form-field>
+        <div *ngIf="username.invalid && (username.dirty || username.touched)">
+          <div class="error" *ngIf="username.errors.whitespace">
+            O login não deve conter espaços.
+          </div>
+          <div class="error" *ngIf="username.errors.minlength">
+            Login deve conter ao menos 4 caracteres.
+          </div>
+        </div>
         <mat-form-field>
           <mat-label for="email">Email</mat-label>
           <input
@@ -37,6 +53,11 @@
           />
           <mat-error *ngIf="username.invalid">Username inválido</mat-error>
         </mat-form-field>
+        <div *ngIf="email.invalid && (email.dirty || email.touched)">
+          <div class="error" *ngIf="email.errors?.pattern">
+            Email inválido.
+          </div>
+        </div>
         <mat-form-field>
           <mat-label for="password">Senha</mat-label>
           <input

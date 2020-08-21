@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../auth.service';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { User } from '../../user.model';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { error } from '@angular/compiler/src/util';
@@ -30,12 +30,30 @@ export class RegisterComponent implements OnInit {
 
   createForm() {
     this.registerForm = this.fb.group({
-      email: '',
-      nome: '',
-      username: '',
-      password: '',
+      email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+      nome: ['', [Validators.required, this.noNumberValidator, this.startWithSpace]],
+      username: ['', [Validators.required, Validators.minLength(4) , this.noWhitespaceValidator]],
+      password: ['', Validators.required],
       passwordConfirmation: ''
     });
+  }
+
+  noNumberValidator(control: FormControl) {
+    const input: string = control.value;
+    const hasNumbers = input.match(/(\d+)/);
+    return hasNumbers ? { 'hasnumbers': true } : null;
+  }
+
+  noWhitespaceValidator(control: FormControl) {
+    const input: string = control.value;
+    const hasWhitespace = input.match(' ');
+    return hasWhitespace ? { 'whitespace': true } : null;
+  }
+
+  startWithSpace(control: FormControl) {
+    const input: string = control.value;
+    const startWithSpace = input.charAt(0).match(' ');
+    return startWithSpace ? { 'startwithspace': true } : null;
   }
 
   onSubmit() {
@@ -64,31 +82,31 @@ export class RegisterComponent implements OnInit {
   }
 
   get email() {
-    return this.registerForm.get('email').value;
+    return this.registerForm.get('email');
   }
 
   get username() {
-    return this.registerForm.get('username').value;
+    return this.registerForm.get('username');
   }
 
   get password() {
-    return this.registerForm.get('password').value;
+    return this.registerForm.get('password');
   }
 
   get passwordConfirmation() {
-    return this.registerForm.get('passwordConfirmation').value;
+    return this.registerForm.get('passwordConfirmation');
   }
 
   get nome() {
-    return this.registerForm.get('nome').value;
+    return this.registerForm.get('nome');
   }
 
   getUser(): User {
     return {
-      nome: this.nome,
-      email: this.email,
-      username: this.username,
-      password: this.password,
+      nome: this.nome.value,
+      email: this.email.value,
+      username: this.username.value,
+      password: this.password.value,
       enabled: true
     };
   }
