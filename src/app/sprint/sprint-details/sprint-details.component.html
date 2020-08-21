@@ -2,8 +2,10 @@
   <button mat-icon-button aria-label="Voltar" [routerLink]="['/sprints']">
     <mat-icon>arrow_back</mat-icon> Sprint 03
   </button>
-  <div class="acoes">
-    <button mat-icon-button aria-label="Editar" [routerLink]="['/criarSprint']">
+
+
+  <div class="acoes" *ngIf="sprint.estado === 'nova'">
+    <button mat-icon-button aria-label="Editar" (click)="edit(sprint.id)">
       <mat-icon>edit</mat-icon>
     </button>
     <button mat-icon-button aria-label="Deletar" [routerLink]="['/sprints']">

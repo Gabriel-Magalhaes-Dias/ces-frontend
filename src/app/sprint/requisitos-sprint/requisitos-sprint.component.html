@@ -1,7 +1,8 @@
 <div *ngFor="let requisito of requisitos">
     <app-requisito-card [requisito]="requisito" 
         [checkbox]="checkbox"
-        (selecionado)="selecionarRequisito($event)"
-        (desselecionado)="desselecionarRequisito($event)"
+        [selecionado] = "selecionado(requisito)"
+        (selecionar)="selecionarRequisito($event)"
+        (desselecionar)="desselecionarRequisito($event)"
     ></app-requisito-card>
 </div>

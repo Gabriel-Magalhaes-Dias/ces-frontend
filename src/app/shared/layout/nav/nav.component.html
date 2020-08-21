@@ -4,6 +4,7 @@
             [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" 
             [mode]="(isHandset$ | async) ? 'over' : 'side'"
             [opened]="(isHandset$ | async) === false">
+            
             <mat-nav-list>
                 <h3 mat-subheader>Membro da Equipe</h3>
                 <a mat-list-item [routerLink]="['/backlog']" routerLinkActive="active">

@@ -62,13 +62,14 @@
       mat-raised-button
       color="primary"
     >
-      Criar
+     {{this.id ? 'Editar' : 'Criar'}}
     </button>
   </form>
 </mat-card>
 
 <app-requisitos-sprint
   [requisitos]="requisitos"
+  [entregas]="sprint?.entregas"
   [checkbox]="true"
   (requisitosSelecionados)="setRequisitosSelecionados($event)"
 >

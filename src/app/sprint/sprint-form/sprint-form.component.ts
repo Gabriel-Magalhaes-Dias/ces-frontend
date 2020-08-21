@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ConfirmDialogComponent, DialogData } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { NotificationService } from '../../core/services/notification.service';
 import { SprintService } from '../../core/services/sprint.service';
@@ -17,11 +17,14 @@ import { RequisitoService } from 'src/app/core/services/requisito.service';
 })
 export class SprintFormComponent implements OnInit {
 
+  id: string;
+  sprint: Sprint;
   sprintForm: FormGroup;
   requisitos: Requisito[] = [];
   requisitosSelecionado: Requisito[] = [];
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
     private fb: FormBuilder,
     private notification: NotificationService,
@@ -30,13 +33,29 @@ export class SprintFormComponent implements OnInit {
     private requisitoService: RequisitoService,
     private sprintService: SprintService,
   ) {
+    this.id = this.activatedRoute.snapshot.params['id'];
     this.createForm();
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle('Nova Sprint');
+    this.titleService.setTitle(this.id ?  'Editar Sprint' : 'Nova Sprint');
     this.requisitoService.getRequisitosByEstado('novo')
       .subscribe(requisitos => this.requisitos = requisitos)
+
+    if(this.id){
+      this.sprintService.get(this.id)
+        .subscribe(sprint => {
+          this.sprint = sprint
+          this.editSprint();
+        })
+    }
+  }
+
+  editSprint() {
+    this.sprintForm.patchValue({
+      ...this.sprint,
+    });
+    console.log(this.requisitosSelecionado)
   }
 
   createForm() {
@@ -51,12 +70,13 @@ export class SprintFormComponent implements OnInit {
     const config = {
       data: {
         title: 'Confirmação',
-        message: 'Deseja criar a sprint?'
+        message: this.id ? 'Deseja editar a sprint' : 'Deseja criar a sprint?'
       } as DialogData
     }
     const dialogRef = this.dialog.open(ConfirmDialogComponent, config)
     dialogRef.afterClosed().subscribe((opcao: boolean) => {
       if (opcao) {
+        console.log(this.getSprint())
         this.sprintService.salvar(this.getSprint())
           .subscribe(sprint => {
             this.router.navigate(['/backlog'])

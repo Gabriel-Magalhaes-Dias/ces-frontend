@@ -11,20 +11,21 @@ export class RequisitoCardComponent implements OnInit {
 
   @Input() requisito: Requisito;
   @Input() checkbox: boolean;
-  @Output() selecionado = new BehaviorSubject<Requisito>(undefined);
-  @Output() desselecionado = new BehaviorSubject<Requisito>(undefined);  
+  @Input() selecionado: boolean;
+  @Output() selecionar = new BehaviorSubject<Requisito>(undefined);
+  @Output() desselecionar = new BehaviorSubject<Requisito>(undefined);  
 
   constructor() { }
 
   ngOnInit(): void {
-    if(!this.checkbox){ }
+    if(this.selecionado){this.selecionar.next(this.requisito)}
   }
 
   onCheck(value: Requisito, isChecked: boolean) {
     if (isChecked) {
-      this.selecionado.next(value);
+      this.selecionar.next(value);
     } else {
-      this.desselecionado.next(value);
+      this.desselecionar.next(value);
     }
   }
 

@@ -10,12 +10,15 @@ import { BehaviorSubject } from 'rxjs';
 export class RequisitosSprintComponent implements OnInit {
 
   @Input() requisitos: Requisito[];
+  @Input() entregas: Requisito[];
   @Input() checkbox: boolean;
   @Output() requisitosSelecionados = new BehaviorSubject<Requisito[]>([]);
 
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+
+  }
 
   selecionarRequisito(requisito: Requisito) {
     this.onCheck(requisito, true)
@@ -23,6 +26,10 @@ export class RequisitosSprintComponent implements OnInit {
 
   desselecionarRequisito(requisito: Requisito) {
     this.onCheck(requisito, false)
+  }
+
+  selecionado(requisito: Requisito) {
+    return  this.entregas?.find(r => r.id === requisito.id);
   }
 
   onCheck(value: Requisito, isChecked: boolean) {

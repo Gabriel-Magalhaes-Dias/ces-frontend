@@ -26,6 +26,7 @@
       <mat-checkbox
         #check
         [value]="requisito"
+        [checked]='selecionado'
         (change)="onCheck(requisito, check.checked)"
       ></mat-checkbox>
     </div>

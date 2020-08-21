@@ -46,4 +46,8 @@ export class SprintDetailsComponent implements OnInit {
     })
   }
 
+  edit(id: number) {
+    this.router.navigate([`/sprints/edit/${id}`])
+  }
+
 }
