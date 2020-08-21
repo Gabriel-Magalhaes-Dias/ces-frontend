@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../auth.service';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../../user.model';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { error } from '@angular/compiler/src/util';
@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
 
   createForm() {
     this.registerForm = this.fb.group({
-      //email: '',
+      email: ['', [Validators.required], [Validators.email]],
       nome: '',
       username: '',
       password: '',
@@ -62,11 +62,11 @@ export class RegisterComponent implements OnInit {
       this.registerForm.get('passwordConfirmation').setValue('');
     }
   }
-/*
+
   get email() {
     return this.registerForm.get('email').value;
   }
-*/
+
   get username() {
     return this.registerForm.get('username').value;
   }
@@ -86,7 +86,7 @@ export class RegisterComponent implements OnInit {
   getUser(): User {
     return {
       nome: this.nome,
-      //email: this.email,
+      email: this.email,
       username: this.username,
       password: this.password,
       enabled: true

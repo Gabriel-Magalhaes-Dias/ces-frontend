@@ -39,6 +39,11 @@
           <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef > Email </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="ativo">
           <mat-header-cell *matHeaderCellDef > Ativo </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.enabled? "Sim" : "Não"}} </mat-cell>

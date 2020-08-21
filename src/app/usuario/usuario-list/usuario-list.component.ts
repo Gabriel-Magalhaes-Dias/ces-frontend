@@ -19,7 +19,7 @@ import { Usuario } from '../../shared/models/usuario';
 })
 export class UsuarioListComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['position', 'nome', 'username', 'ativo', 'numProjetosCriados', 'numProjetosEnvolvidos', 'acoes']
+  displayedColumns: string[] = ['position', 'nome', 'username', 'email',  'ativo', 'numProjetosCriados', 'numProjetosEnvolvidos', 'acoes']
   // exampleDatabase: ExampleHttpDatabase | null;
   data: Usuario[] = []
 

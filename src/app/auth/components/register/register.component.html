@@ -15,7 +15,6 @@
         />
         <mat-error *ngIf="nome.invalid">Nome inválido</mat-error>
       </mat-form-field>
-        <br />
         <mat-form-field>
           <mat-label for="username">Nome de usuário</mat-label>
           <input
@@ -27,7 +26,17 @@
           />
           <mat-error *ngIf="username.invalid">Username inválido</mat-error>
         </mat-form-field>
-        <br />
+        <mat-form-field>
+          <mat-label for="email">Email</mat-label>
+          <input
+            required
+            id="email"
+            formControlName="email"
+            matInput
+            placeholder="Digite seu email"
+          />
+          <mat-error *ngIf="username.invalid">Username inválido</mat-error>
+        </mat-form-field>
         <mat-form-field>
           <mat-label for="password">Senha</mat-label>
           <input

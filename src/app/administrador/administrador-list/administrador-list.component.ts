@@ -19,7 +19,7 @@ import { Administrador } from 'src/app/shared/models/administrador';
 })
 export class AdministradorListComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['position', 'nome', 'username', 'ativo', 'acoes']
+  displayedColumns: string[] = ['position', 'nome', 'username', 'email', 'ativo', 'acoes']
   // exampleDatabase: ExampleHttpDatabase | null;
   data: Administrador[] = []
 

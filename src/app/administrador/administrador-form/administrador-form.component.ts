@@ -20,6 +20,7 @@ export class AdministradorFormComponent implements OnInit {
   administradorForm = this.fb.group({
     nome: ['', [Validators.required, this.noNumberValidator, this.startWithSpace]],
     username: ['', [Validators.required, Validators.minLength(4) , this.noWhitespaceValidator]],
+    email: ['', [Validators.required]],
     password: ['', Validators.required],
     enabled: ['']
   })
@@ -102,12 +103,14 @@ export class AdministradorFormComponent implements OnInit {
   }
 
   get nome() {return this.administradorForm.get('nome')}
+  get email() {return this.administradorForm.get('email')}
   get username() {return this.administradorForm.get('username')}
 
   updateAdministrador(administrador: Administrador) {
     this.administradorForm.patchValue({
       nome: administrador.nome,
       username: administrador.username,
+      email: administrador.email,
       //password: administrador.password,
       enabled: administrador.enabled
     })

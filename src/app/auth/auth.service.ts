@@ -48,7 +48,7 @@ export class AuthenticationService {
       nome: user.nome,
       username: user.username,
       enabled: user.enabled,
-      //email: user.email,
+      email: user.email,
       password: user.password
       //role: ['user']
     }, httpOptions);

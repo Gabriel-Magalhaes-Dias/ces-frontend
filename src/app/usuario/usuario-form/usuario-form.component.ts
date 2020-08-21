@@ -20,7 +20,8 @@ export class UsuarioFormComponent implements OnInit {
   usuarioForm = this.fb.group({
     nome: ['', [Validators.required, this.noNumberValidator, this.startWithSpace]],
     username: ['', [Validators.required, Validators.minLength(4) , this.noWhitespaceValidator]],
-    password: ['', Validators.required],
+    email: ['', [Validators.required]],
+    password: ['', [Validators.required, this.startWithSpace, this.noWhitespaceValidator]],
     enabled: ['']
   })
 
@@ -101,6 +102,7 @@ export class UsuarioFormComponent implements OnInit {
   }
 
   get nome() {return this.usuarioForm.get('nome')}
+  get email() {return this.usuarioForm.get('email')}
   get username() {return this.usuarioForm.get('username')}
 
   updateUsuario(usuario: Usuario) {
@@ -108,6 +110,7 @@ export class UsuarioFormComponent implements OnInit {
       nome: usuario.nome,
       username: usuario.username,
       //password: usuario.password,
+      email: usuario.email,
       enabled: usuario.enabled
     })
   }
