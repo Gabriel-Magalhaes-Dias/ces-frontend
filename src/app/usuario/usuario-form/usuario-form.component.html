@@ -30,14 +30,11 @@
         </div>
         <mat-form-field>
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email" />
+          <input type="email" matInput formControlName="email" />
         </mat-form-field>
         <div *ngIf="email.invalid && (email.dirty || email.touched)">
-          <div class="error" *ngIf="email.errors.startwithspace">
-            O email não deve começar com espaço.
-          </div>
-          <div class="error" *ngIf="email.errors.whitespace">
-            O email não deve conter espaços.
+          <div class="error" *ngIf="email.errors?.pattern">
+            Email inválido.
           </div>
         </div>
         <br />

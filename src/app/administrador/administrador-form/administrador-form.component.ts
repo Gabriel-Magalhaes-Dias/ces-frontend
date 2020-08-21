@@ -20,7 +20,7 @@ export class AdministradorFormComponent implements OnInit {
   administradorForm = this.fb.group({
     nome: ['', [Validators.required, this.noNumberValidator, this.startWithSpace]],
     username: ['', [Validators.required, Validators.minLength(4) , this.noWhitespaceValidator]],
-    email: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
     password: ['', Validators.required],
     enabled: ['']
   })
