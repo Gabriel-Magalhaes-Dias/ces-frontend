@@ -8,15 +8,17 @@ import { Sprint } from '../../shared/models/sprint';
   providedIn: 'root',
 })
 export class SprintService {
-  private requisitoUrl: string = `${environment.apiUrl}/sprints`;
+  private sprintUrl: string = `${environment.apiUrl}/sprints`;
 
   constructor(private http: HttpClient) {}
 
   salvar(sprint: Sprint): Observable<Sprint> {
-    return this.http.post<Sprint>(this.requisitoUrl, sprint);
+    return this.http.post<Sprint>(this.sprintUrl, sprint);
   }
 
   get(id: string): Observable<Sprint> {
+    return this.http.get<Sprint>(`${this.sprintUrl}/${id}`);
+    /*
     return of({
       id: +id,
       numeroSprint: 1,
@@ -64,10 +66,12 @@ export class SprintService {
         },
       ],
     });
+    */
   }
 
   getSprints(): Observable<Sprint[]> {
-    return of([
+    return this.http.get<Sprint[]>(`${this.sprintUrl}`);
+    /*return of([
       {
         id: 1,
         numeroSprint: 1,
@@ -89,5 +93,6 @@ export class SprintService {
         entregas: [{ nome: 'Requisito 01' }, { nome: 'Requisito 02' }],
       },
     ]);
+  */
   }
 }

@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
 
-    if (this.password === this.passwordConfirmation) {
+    if (this.password.value === this.passwordConfirmation.value) {
       this.isLoading = true;
       this.user = this.getUser();
 

@@ -1,6 +1,6 @@
 <div class="title">
   <button mat-icon-button aria-label="Voltar" [routerLink]="['/sprints']">
-    <mat-icon>arrow_back</mat-icon> Sprint 03
+    <mat-icon>arrow_back</mat-icon> Sprint {{ sprint?.numeroSprint }}
   </button>
 
 
@@ -20,8 +20,8 @@
 </div>
 
 <mat-card class="info">
-  <span>Data início: {{sprint.dataInicio | date: 'dd/mm/yyyy'}}</span>
-  <span>Data entrega: {{sprint.dataFim | date: 'dd/mm/yyyy'}}</span>
+  <span>Data início: {{sprint.dataInicio | date: 'dd/MM/yyyy'}}</span>
+  <span>Data entrega: {{sprint.dataFim | date: 'dd/MM/yyyy'}}</span>
   <span>Estado: {{sprint.estado}}</span>
   <span>Valor entregue ao negócio: {{sprint.valorEntregueAoNegocio}}</span>
 </mat-card>

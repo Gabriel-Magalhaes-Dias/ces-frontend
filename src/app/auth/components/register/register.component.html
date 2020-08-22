@@ -13,9 +13,9 @@
           matInput
           placeholder="Digite seu nome"
         />
-        <mat-error *ngIf="nome.invalid">Nome inválido</mat-error>
-        <mat-error *ngIf="nome.errors.hasnumbers">O nome não deve conter números.</mat-error>
-        <mat-error *ngIf="nome.errors.startwithspace">O nome não deve começar com espaço.</mat-error>
+        <mat-error *ngIf="nome?.invalid">Nome inválido</mat-error>
+        <mat-error *ngIf="nome?.errors?.hasnumbers">O nome não deve conter números.</mat-error>
+        <mat-error *ngIf="nome?.errors?.startwithspace">O nome não deve começar com espaço.</mat-error>
       </mat-form-field>
         <mat-form-field>
           <mat-label for="username">Nome de usuário</mat-label>
@@ -26,9 +26,9 @@
             matInput
             placeholder="Digite seu usuário"
           />
-          <mat-error *ngIf="username.invalid">Username inválido</mat-error>
-          <mat-error *ngIf="username.errors.whitespace">O login não deve conter espaços.</mat-error>
-          <mat-error *ngIf="username.errors.minlength"> Login deve conter ao menos 4 caracteres.</mat-error>
+          <mat-error *ngIf="username?.invalid">Username inválido</mat-error>
+          <mat-error *ngIf="username?.errors?.whitespace">O login não deve conter espaços.</mat-error>
+          <mat-error *ngIf="username?.errors?.minlength"> Login deve conter ao menos 4 caracteres.</mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label for="email">Email</mat-label>
@@ -39,7 +39,7 @@
             matInput
             placeholder="Digite seu email"
           />
-          <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">Email inválido</mat-error>
+          <mat-error *ngIf="email?.invalid && (email?.dirty || email?.touched)">Email inválido</mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label for="password">Senha</mat-label>
