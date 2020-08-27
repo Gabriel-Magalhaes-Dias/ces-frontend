@@ -1,30 +1,37 @@
-<div class="title">
-  <button mat-icon-button aria-label="Voltar" [routerLink]="['/sprints']">
-    <mat-icon>arrow_back</mat-icon> Sprint {{ sprint?.numeroSprint }}
-  </button>
-
-
-  <div class="acoes" *ngIf="sprint.estado === 'nova'">
-    <button mat-icon-button aria-label="Editar" (click)="edit(sprint.id)">
-      <mat-icon>edit</mat-icon>
+<div *ngIf="sprint$ | async as sprint">
+  <div class="title">
+    <button mat-icon-button aria-label="Voltar" [routerLink]="['/sprints']">
+      <mat-icon>arrow_back</mat-icon> Sprint {{ sprint.numeroSprint }}
     </button>
-    <button mat-icon-button aria-label="Deletar" [routerLink]="['/sprints']">
-      <mat-icon>delete</mat-icon>
+
+    <div class="acoes" *ngIf="sprint.estado === 'novo'">
+      <button mat-icon-button aria-label="Editar" (click)="edit(sprint.id)">
+        <mat-icon>edit</mat-icon>
+      </button>
+<!--       <button mat-icon-button aria-label="Deletar" [routerLink]="['/sprints']">
+        <mat-icon>delete</mat-icon>
+      </button> -->
+    </div>
+  </div>
+  <br />
+
+  <div class="actions">
+    <button mat-raised-button color="primary" (click)="iniciarSprint()">
+      Iniciar Sprint
     </button>
   </div>
+
+  <mat-card class="info">
+    <span>Data início: {{ sprint.dataInicio | date: "dd/MM/yyyy" }}</span>
+    <span>Data entrega: {{ sprint.dataFim | date: "dd/MM/yyyy" }}</span>
+    <span>Estado: {{ sprint.estado }}</span>
+    <span>Valor entregue ao negócio: {{ sprint.valorEntregueAoNegocio }}</span>
+  </mat-card>
+
+  <app-requisitos-sprint *ngIf="requisitos$ | async as requisitos"
+    [entregas]="sprint.entregas"
+    [requisitos]="requisitos"
+    [checkbox]="false"
+  >
+  </app-requisitos-sprint>
 </div>
-<br>
-
-<div class="actions">
-  <button mat-raised-button color="primary" (click)="iniciarSprint()">Iniciar Sprint</button>
-</div>
-
-<mat-card class="info">
-  <span>Data início: {{sprint.dataInicio | date: 'dd/MM/yyyy'}}</span>
-  <span>Data entrega: {{sprint.dataFim | date: 'dd/MM/yyyy'}}</span>
-  <span>Estado: {{sprint.estado}}</span>
-  <span>Valor entregue ao negócio: {{sprint.valorEntregueAoNegocio}}</span>
-</mat-card>
-
-<app-requisitos-sprint [requisitos]="sprint.entregas" [checkbox]="false">
-</app-requisitos-sprint>

@@ -38,11 +38,11 @@ export class SprintFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle(this.id ?  'Editar Sprint' : 'Nova Sprint');
+    this.titleService.setTitle(this.id ? 'Editar Sprint' : 'Nova Sprint');
     this.requisitoService.getRequisitosByEstado('novo')
       .subscribe(requisitos => this.requisitos = requisitos)
 
-    if(this.id){
+    if (this.id) {
       this.sprintService.get(this.id)
         .subscribe(sprint => {
           this.sprint = sprint
@@ -55,7 +55,6 @@ export class SprintFormComponent implements OnInit {
     this.sprintForm.patchValue({
       ...this.sprint,
     });
-    console.log(this.requisitosSelecionado)
   }
 
   createForm() {
@@ -76,8 +75,18 @@ export class SprintFormComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, config)
     dialogRef.afterClosed().subscribe((opcao: boolean) => {
       if (opcao) {
-        console.log(this.getSprint())
-        this.sprintService.salvar(this.getSprint())
+        const sprint = this.getSprint();
+
+        this.id ?
+        this.sprintService.update(sprint)
+          .subscribe(sprint => {
+            this.router.navigate(['/backlog'])
+            this.notification.success('Sprint atualizada com sucesso')
+          }, err => {
+            console.log(err);
+            this.notification.error(err);
+          }) :
+        this.sprintService.create(sprint)
           .subscribe(sprint => {
             this.router.navigate(['/backlog'])
             this.notification.success('Sprint criada com sucesso')
@@ -96,18 +105,23 @@ export class SprintFormComponent implements OnInit {
   get valorEntregueAoNegocio() {
     return this.sprintForm.get('valorEntregueAoNegocio').value;
   }
-  
+
 
   getSprint(): Sprint {
     return {
-      estado: 'nova',
-      numeroSprint: 1,
+      id: +this.id,
       dataInicio: new Date,
       dataFim: new Date,
       valorEntregueAoNegocio: this.valorEntregueAoNegocio,
       valorAprovadoCliente: false,
-      entregas: this.requisitosSelecionado,
-      requisitosIds: this.requisitosSelecionado.map(requisito => requisito.id),
+      entregas: this.requisitosSelecionado.map(req => {
+        return {
+          estimativa: 0,
+          idAnalista: 1,
+          idRequisito: req.id,
+          requisito: req,
+        }
+      })
     }
   }
 
