@@ -12,61 +12,16 @@ export class SprintService {
 
   constructor(private http: HttpClient) {}
 
-  salvar(sprint: Sprint): Observable<Sprint> {
+  create(sprint: Sprint): Observable<Sprint> {
     return this.http.post<Sprint>(this.sprintUrl, sprint);
+  }
+
+  update(sprint: Sprint): Observable<Sprint> {
+    return this.http.put<Sprint>(`${this.sprintUrl}/${sprint.id}`, sprint);
   }
 
   get(id: string): Observable<Sprint> {
     return this.http.get<Sprint>(`${this.sprintUrl}/${id}`);
-    /*
-    return of({
-      id: +id,
-      numeroSprint: 1,
-      estado: 'nova',
-      dataInicio: new Date(),
-      dataFim: new Date(),
-      valorEntregueAoNegocio: 'Valor ',
-      valorAprovadoCliente: false,
-      entregas: [
-        {
-          id: 1,
-          nome: 'Manter backlog',
-          observacoes: '',
-          prioridade: 99,
-          dataInicio: 1597965691269,
-          dataEntrega: 1597965691269,
-          idade: 4,
-          estado: 'novo',
-          recuperado: 0,
-          userStory: {
-            id: 1,
-            comoUm: '',
-            acao: '',
-            paraQueSejaPossivel: '',
-            tema: '',
-          },
-        },
-        {
-          id: 2,
-          nome: 'Manter sprint',
-          observacoes: '',
-          prioridade: 90,
-          dataInicio: 1597965691315,
-          dataEntrega: 1597965691315,
-          idade: 8,
-          estado: 'novo',
-          recuperado: 0,
-          userStory: {
-            id: 2,
-            comoUm: '',
-            acao: '',
-            paraQueSejaPossivel: '',
-            tema: '',
-          },
-        },
-      ],
-    });
-    */
   }
 
   getSprints(): Observable<Sprint[]> {

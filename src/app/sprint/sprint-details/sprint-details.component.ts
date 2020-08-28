@@ -5,6 +5,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ConfirmDialogComponent, DialogData } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { SprintService } from 'src/app/core/services/sprint.service';
 import { Sprint } from 'src/app/shared/models/sprint';
+import { Requisito } from 'src/app/shared/models/requisito';
+import { RequisitoService } from 'src/app/core/services/requisito.service';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-sprint-details',
@@ -14,21 +17,23 @@ import { Sprint } from 'src/app/shared/models/sprint';
 export class SprintDetailsComponent implements OnInit {
 
   idSprint: string;
-  sprint: Sprint;
+  sprint$: Observable<Sprint>;
+  requisitos$: Observable<Requisito[]>;
 
   constructor(
     private route: ActivatedRoute,
     private dialog: MatDialog, 
     private router: Router, 
     private titleService: Title,
-    private sprintService: SprintService
+    private sprintService: SprintService,
+    private requisitoService: RequisitoService
   ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('Informações da Sprint');
     this.idSprint = this.route.snapshot.params.id;
-    this.sprintService.get(this.idSprint)
-      .subscribe(sprint => this.sprint = sprint)
+    this.requisitos$ = this.requisitoService.getRequisitosByEstado('novo');
+    this.sprint$ = this.sprintService.get(this.idSprint);
   }
 
   iniciarSprint(): void {

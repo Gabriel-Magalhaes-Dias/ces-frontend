@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Requisito } from 'src/app/shared/models/requisito';
 import { BehaviorSubject } from 'rxjs';
+import { Entrega } from 'src/app/shared/models/entrega';
 
 @Component({
   selector: 'app-requisitos-sprint',
@@ -9,15 +10,22 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class RequisitosSprintComponent implements OnInit {
 
+  @Input() entregas: Entrega[];
   @Input() requisitos: Requisito[];
-  @Input() entregas: Requisito[];
   @Input() checkbox: boolean;
   @Output() requisitosSelecionados = new BehaviorSubject<Requisito[]>([]);
 
   constructor() { }
 
-  ngOnInit(): void { 
-
+  ngOnInit() { 
+    if(this.entregas){
+      this.requisitos = this.requisitos?.map(requisito => {
+        const contains = this.entregas.find(entrega => entrega.requisito.id === requisito.id);
+        if (contains) { return requisito; }
+        return;
+      })
+    }
+    this.requisitos = this.requisitos?.filter(requisito => requisito !== undefined)
   }
 
   selecionarRequisito(requisito: Requisito) {
@@ -29,7 +37,7 @@ export class RequisitosSprintComponent implements OnInit {
   }
 
   selecionado(requisito: Requisito) {
-    return  this.entregas?.find(r => r.id === requisito.id);
+    return this.entregas?.find(entrega => entrega.requisito.id === requisito.id);
   }
 
   onCheck(value: Requisito, isChecked: boolean) {
