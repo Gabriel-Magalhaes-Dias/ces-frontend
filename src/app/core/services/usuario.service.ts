@@ -35,6 +35,10 @@ export class UsuarioService {
     return this.http.put<Usuario>(`${this.usuarioUrl}/${id}`, usuario)
   }
 
+  updatePassword(novaSenha: string): Observable<void> {
+    return this.http.put<void>(`${this.usuarioUrl}/password`, novaSenha)
+  }
+
   excluir(id: number): Observable<void> {
     return this.http.delete<void>(`${this.usuarioUrl}/${id}`);
   }

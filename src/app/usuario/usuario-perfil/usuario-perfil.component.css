@@ -1,0 +1,41 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    margin-top: 50px;
+}
+#nome {
+    font-size: 1.5rem;
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    margin: 20px;
+}
+
+.atividade {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-items: left;
+}
+
+.container {
+}
+
+button {
+    position: relative;
+    float: right;
+}
+

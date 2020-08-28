@@ -1,0 +1,70 @@
+<h1>Editar Perfil</h1>
+
+<form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+  <mat-card class="cards">
+    <mat-card class="column">
+          <mat-form-field>
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="nome" />
+          </mat-form-field>
+          <div *ngIf="nome.invalid && (nome.dirty || nome.touched)">
+            <div class="error" *ngIf="nome.errors.hasnumbers">
+              O nome não deve conter números.
+            </div>
+            <div class="error" *ngIf="nome.errors.startwithspace">
+              O nome não deve começar com espaço.
+            </div>
+          </div>
+          <mat-form-field>
+            <mat-label>Login</mat-label>
+            <input matInput formControlName="username" />
+          </mat-form-field>
+          <div *ngIf="username.invalid && (username.dirty || username.touched)">
+            <div class="error" *ngIf="username.errors.whitespace">
+              O login não deve conter espaços.
+            </div>
+            <div class="error" *ngIf="username.errors.minlength">
+              Login deve conter ao menos 4 caracteres.
+            </div>
+          </div>
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="email" />
+          </mat-form-field>
+          <div *ngIf="email.invalid && (email.dirty || email.touched)">
+            <div class="error" *ngIf="email.errors?.pattern">
+              Email inválido.
+            </div>
+          </div>
+          <br>
+          <mat-checkbox formControlName="enabled">Ativo</mat-checkbox>
+    </mat-card>
+  
+    <mat-card class="column">
+      <mat-card-title class="titlehabilidade"> Habilidades </mat-card-title>
+      <div class="habilidade">
+        <mat-form-field class="jose">
+          <mat-label>Habilidade</mat-label>
+          <input matInput formControlName="habilidade">
+        </mat-form-field>
+        <button type="button" mat-icon-button color="accent" (click)="addHabilidade()">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button type="button" mat-icon-button color="accent" (click)="deleteHabilidade()">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <div *ngFor="let habilidade of habilidades">
+        <span> {{habilidade.descricao}} </span>
+      </div>
+    </mat-card>
+  </mat-card>
+  <div class="actions">
+    <button mat-raised-button color="warn" [routerLink]="['/usuarios/perfil', usuario.id]">
+      Cancelar
+    </button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!usuarioForm.valid">
+      {{ "Editar" }}
+    </button>
+  </div>
+</form>

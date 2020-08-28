@@ -1,0 +1,42 @@
+.cards {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  margin-right: 20px;
+}
+
+.jose {
+  width: 100%;
+}
+
+.titlehabilidade {
+  font-size: 1.25rem;
+}
+
+.habilidade {
+  width: 100%;
+  display: flex;
+}
+
+.atividade {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-items: left;
+}
+
+.actions {
+  display: flex;
+  margin-top: 20px;
+}
+
+button {
+  margin-right: 10px;
+}

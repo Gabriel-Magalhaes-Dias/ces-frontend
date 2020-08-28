@@ -28,9 +28,13 @@
       </span>
     </button>
     <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
-      <a mat-menu-item>
+      <a mat-menu-item [routerLink]="['/usuarios/perfil/', user.id]">
         <mat-icon>person</mat-icon>
-        <span>Conta</span>
+        <span>Perfil</span>
+      </a>
+      <a mat-menu-item [routerLink]="['/usuarios/perfil/', user.id, 'senha']">
+        <mat-icon>vpn_key</mat-icon>
+        <span>Alterar senha</span>
       </a>
       <a mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>

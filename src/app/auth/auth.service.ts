@@ -34,7 +34,6 @@ export class AuthenticationService {
   login(login: Login): Observable<User> {
     return this.http.post<User>(`${environment.apiUrl}/auth/login`, login, httpOptions)
       .pipe(map(u => {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
         this.saveUser(u);
         this.saveTokens(u.authenticationToken, u.refreshToken);
         this.saveUserId(u.id);

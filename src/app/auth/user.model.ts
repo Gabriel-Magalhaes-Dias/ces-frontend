@@ -5,7 +5,6 @@ export interface User {
     email: string;
     enabled: boolean;
     password: string;
-
     roles?: string[];
     isAdmin?: User;
     authenticationToken?: string;

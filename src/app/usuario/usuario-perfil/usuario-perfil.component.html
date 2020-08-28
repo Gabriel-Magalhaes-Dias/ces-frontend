@@ -1,1 +1,45 @@
-<p>usuario-perfil works!</p>
+<h1>Meu perfil</h1>
+
+<div>
+    <mat-card>
+        <button mat-icon-button color="accent" aria-label="Editar" [routerLink]="['/usuarios/perfil/', user.id, 'editar']">
+            <mat-icon>edit</mat-icon>
+        </button>
+
+        <div class="profile">
+            <div class="container">
+                <img src="assets/img/profile-avatar.png" width="100px" height="100px">
+            </div>
+            <span id="nome"> {{user?.nome}} </span>
+            <span id="email"> {{user?.email}} </span>
+            <span id="username"> {{user?.username}} </span>    
+        </div>
+
+
+        <div class="cards">
+            <mat-card class="column">
+                <mat-card-title> 
+                    Habilidades
+                </mat-card-title>
+                <mat-card-content>
+                    <div *ngFor="let habilidade of user?.habilidades">
+                        <span>
+                            {{habilidade.descricao}}
+                        </span>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="column">
+                <mat-card-title> 
+                    Atividade
+                </mat-card-title>
+                <mat-card-content class="atividade">
+                    <span id="criados"> Projetos criados: 2 </span>
+                    <span id="participacao"> Participação em projetos: 5 </span>
+                    <span id="associados"> Projetos associados: 1 </span>   
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-card>
+</div>

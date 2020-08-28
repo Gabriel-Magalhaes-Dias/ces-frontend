@@ -1,0 +1,26 @@
+<h1>Alterar senha</h1>
+<br>
+<form [formGroup]="senhaForm" (ngSubmit)="onSubmit()">
+    <mat-card>
+        <div class="row">
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Nova senha</mat-label>
+                    <input matInput formControlName="novaSenha" />
+                <mat-error *ngIf="novaSenha.invalid">Senha inválida</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Confirmar nova senha</mat-label>
+                    <input matInput formControlName="confirmarSenha" />
+                    <mat-error *ngIf="confirmarSenha.invalid">Senha inválida</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </mat-card>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!senhaForm.valid">
+      {{ "Salvar" }}
+    </button>
+
+</form>
+

@@ -1,0 +1,19 @@
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+  
+.col {
+    flex: 1;
+}
+
+button {
+    margin-top: 20px
+}
+
+mat-form-field {
+    min-width: 300px;
+    width: 97%;
+}
