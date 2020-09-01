@@ -9,6 +9,7 @@ import { Requisito } from 'src/app/shared/models/requisito';
 import { Sprint } from 'src/app/shared/models/sprint';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RequisitoService } from 'src/app/core/services/requisito.service';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-sprint-form',
@@ -20,7 +21,7 @@ export class SprintFormComponent implements OnInit {
   id: string;
   sprint: Sprint;
   sprintForm: FormGroup;
-  requisitos: Requisito[] = [];
+  requisitos$: Observable<Requisito[]>;
   requisitosSelecionado: Requisito[] = [];
 
   constructor(
@@ -37,18 +38,13 @@ export class SprintFormComponent implements OnInit {
     this.createForm();
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.titleService.setTitle(this.id ? 'Editar Sprint' : 'Nova Sprint');
-    this.requisitoService.getRequisitosByEstado('novo')
-      .subscribe(requisitos => this.requisitos = requisitos)
-
     if (this.id) {
-      this.sprintService.get(this.id)
-        .subscribe(sprint => {
-          this.sprint = sprint
-          this.editSprint();
-        })
+      this.sprint = await  this.sprintService.get(this.id).toPromise();
+      this.editSprint();
     }
+    this.requisitos$ = this.requisitoService.getRequisitosByEstado('novo');
   }
 
   editSprint() {
@@ -99,6 +95,7 @@ export class SprintFormComponent implements OnInit {
   }
 
   setRequisitosSelecionados(requisitos: Requisito[]) {
+    console.log(requisitos);
     this.requisitosSelecionado = requisitos;
   }
 

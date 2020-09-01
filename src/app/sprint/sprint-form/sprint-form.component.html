@@ -1,6 +1,6 @@
 <div class="title">
   <button mat-icon-button aria-label="Voltar" [routerLink]="['/sprints']">
-    <mat-icon>arrow_back</mat-icon> Nova Sprint
+    <mat-icon>arrow_back</mat-icon> {{this.id ? 'Editar' : 'Nova'}} Sprint
   </button>
 </div>
 <br />
@@ -28,7 +28,7 @@
     </mat-form-field>
   </div>
 </div> -->
-
+<div *ngIf="requisitos$ | async as requisitos">
 <mat-card>
   <form class="form" [formGroup]="sprintForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="col">
@@ -74,3 +74,4 @@
   (requisitosSelecionados)="setRequisitosSelecionados($event)"
 >
 </app-requisitos-sprint>
+</div>

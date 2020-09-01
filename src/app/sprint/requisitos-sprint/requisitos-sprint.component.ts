@@ -17,23 +17,14 @@ export class RequisitosSprintComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { 
-    if(this.entregas){
-      this.requisitos = this.requisitos?.map(requisito => {
-        const contains = this.entregas.find(entrega => entrega.requisito.id === requisito.id);
-        if (contains) { return requisito; }
-        return;
+  ngOnInit() {
+    this.entregas?.map(entrega => {
+      this.requisitos?.map(requisito => {
+          if(entrega.requisito.id === requisito.id) {
+            this.onCheck(requisito, true);
+          }
+        });
       })
-    }
-    this.requisitos = this.requisitos?.filter(requisito => requisito !== undefined)
-  }
-
-  selecionarRequisito(requisito: Requisito) {
-    this.onCheck(requisito, true)
-  }
-
-  desselecionarRequisito(requisito: Requisito) {
-    this.onCheck(requisito, false)
   }
 
   selecionado(requisito: Requisito) {

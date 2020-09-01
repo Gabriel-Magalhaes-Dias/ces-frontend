@@ -8,7 +8,7 @@ import { Sprint } from '../../shared/models/sprint';
   providedIn: 'root',
 })
 export class SprintService {
-  private sprintUrl: string = `${environment.apiUrl}/sprints`;
+  private sprintUrl = `${environment.apiUrl}/sprints`;
 
   constructor(private http: HttpClient) {}
 
@@ -26,28 +26,5 @@ export class SprintService {
 
   getSprints(): Observable<Sprint[]> {
     return this.http.get<Sprint[]>(`${this.sprintUrl}`);
-    /*return of([
-      {
-        id: 1,
-        numeroSprint: 1,
-        estado: 'nova',
-        dataInicio: new Date(),
-        dataFim: new Date(),
-        valorEntregueAoNegocio: 'Valor ',
-        valorAprovadoCliente: false,
-        entregas: [{ nome: 'Requisito 01' }, { nome: 'Requisito 02' }],
-      },
-      {
-        id: 2,
-        numeroSprint: 2,
-        estado: 'nova',
-        dataInicio: new Date(),
-        dataFim: new Date(),
-        valorEntregueAoNegocio: 'Valor?',
-        valorAprovadoCliente: false,
-        entregas: [{ nome: 'Requisito 01' }, { nome: 'Requisito 02' }],
-      },
-    ]);
-  */
   }
 }

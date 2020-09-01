@@ -8,12 +8,17 @@ import { SprintDetailsComponent } from './sprint-details/sprint-details.componen
 import { SprintFormComponent } from './sprint-form/sprint-form.component';
 import { SprintListComponent } from './sprint-list/sprint-list.component';
 import { SprintRoutingModule } from './sprint-routing.module';
-import { RequisitoCardComponent } from './requisito-card/requisito-card.component';
 import { RequisitosSprintComponent } from './requisitos-sprint/requisitos-sprint.component';
 import { SprintCardComponent } from './sprint-card/sprint-card.component';
 
 @NgModule({
-  declarations: [SprintFormComponent, SprintListComponent, SprintDetailsComponent, RequisitoCardComponent, RequisitosSprintComponent, SprintCardComponent],
+  declarations: [
+    SprintFormComponent,
+    SprintListComponent,
+    SprintDetailsComponent,
+    RequisitosSprintComponent, 
+    SprintCardComponent
+  ],
   imports: [
     CommonModule,
     SprintRoutingModule,
