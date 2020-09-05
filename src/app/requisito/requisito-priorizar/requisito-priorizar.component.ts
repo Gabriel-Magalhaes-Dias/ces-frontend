@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { RequisitoService } from 'src/app/core/services/requisito.service';
 import { Requisito } from 'src/app/shared/models/requisito';
+import { UserStory } from './../../shared/models/userStory';
 
 export interface Prioridade {
   prioridade: number
@@ -22,19 +23,28 @@ export class RequisitoPriorizarComponent implements OnInit {
     private routeEntrada: ActivatedRoute, private dialog: MatDialog, private router: Router, private notification: NotificationService,
     private requisitoService: RequisitoService) { }
 
-  requisito: Requisito;
+  requisito: Requisito = {
+    nome: "",
+    observacoes: "",
+  };
+  userStory: UserStory = {
+    tema: "",
+    comoUm: "",
+    acao: "",
+    paraQueSejaPossivel: ""
+  }
   tipoDescricao: string;
   id: number;
+  idProjeto: number
 
   priorizarForm = this.fb.group({
     prioridade: ['', [Validators.required]],
   })
 
   priorizar(): void {
-    console.log('entoru')
-    this.requisitoService.priorizar(this.id, this.priorizarForm.value as Prioridade).subscribe(() => {
+    this.requisitoService.priorizar(this.idProjeto, this.id, this.priorizarForm.value as Prioridade).subscribe(() => {
       this.notification.success('Requisito priorizado com sucesso')
-      this.router.navigate(['/backlog'])
+      this.router.navigate(['/backlog/cliente/'+this.idProjeto]);
     },
       () => this.notification.error('Erro ao priorizar requisito'));
   }
@@ -42,7 +52,9 @@ export class RequisitoPriorizarComponent implements OnInit {
   ngOnInit(): void {
     this.titleService.setTitle('Informações do Requisito');
     this.id = parseInt(this.routeEntrada.snapshot.paramMap.get('id'));
-    this.requisitoSevice.get(this.id).subscribe(requisito => (this.requisito = requisito));
+    this.idProjeto = parseInt(this.routeEntrada.parent.snapshot.paramMap.get('idProjeto'));
+    console.log(this.idProjeto);
+    this.requisitoSevice.get(this.idProjeto, this.id).subscribe(requisito => { this.requisito = requisito; this.userStory = requisito.userStory });
   }
 
 }

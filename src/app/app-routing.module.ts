@@ -10,6 +10,11 @@ const routes: Routes = [
     loadChildren: () => import('./administrador/administrador.module').then(m => m.AdministradorModule)
   },
   {
+    path: 'projetos',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./projeto/projeto.module').then(m => m.ProjetoModule)
+  },
+  {
     path: 'backlog',
     canActivate: [AuthGuard],
     loadChildren: () => import('./backlog/backlog.module').then(m => m.BacklogModule)
@@ -31,12 +36,12 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'backlog',
+    redirectTo: 'projetos',
     pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: 'backlog',
+    redirectTo: 'projetos',
     pathMatch: 'full'
   }
 ]

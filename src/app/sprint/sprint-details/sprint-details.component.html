@@ -28,10 +28,28 @@
     <span>Valor entregue ao negócio: {{ sprint.valorEntregueAoNegocio }}</span>
   </mat-card>
 
-  <app-requisitos-sprint *ngIf="requisitos$ | async as requisitos"
-    [entregas]="sprint.entregas"
-    [requisitos]="requisitos"
-    [checkbox]="false"
-  >
-  </app-requisitos-sprint>
+  <mat-card style="margin-bottom: 10px" *ngFor="let entrega of sprint.entregas">
+    <mat-card-header>
+      <mat-card-title>{{ entrega.requisito.nome }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content style="margin-left: 15px;" class="card">
+      <div class="col">
+        <p>Prioridade: {{ entrega.requisito.prioridade }}</p>
+      </div>
+      <div class="col">
+        <p>Idade: {{ entrega.requisito.idade }}</p>
+      </div>
+      <div class="col">
+        <p>
+          Estimativa: 0
+        </p>
+      </div>
+      <div class="col">
+        <p>
+          Autor: -
+        </p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
 </div>

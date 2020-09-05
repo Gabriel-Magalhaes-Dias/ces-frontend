@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 })
 export class UsuarioService {
 
-  private usuarioUrl: string = `${environment.apiUrl}/user/usuarios`
+  private usuarioUrl: string = `${environment.apiUrl}/admin/usuarios`
 
   constructor(private http: HttpClient) { }
 

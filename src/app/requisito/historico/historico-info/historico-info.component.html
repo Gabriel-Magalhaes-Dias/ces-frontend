@@ -1,0 +1,60 @@
+<h1>Requisito {{this.idRequisito}} - Versão {{this.idVersao}}</h1>
+
+<div class="actions">
+  <button mat-raised-button color="warn" class="voltar" (click)="voltar()">Voltar</button>
+</div>
+
+
+<mat-card>
+
+  <div class="col">
+    Nome
+    <br>
+    <mat-form-field>
+      <input disabled matInput [(value)]="historico.nome">
+    </mat-form-field>
+    <br>
+    Forma de Descrição
+    <br>
+    <mat-form-field>
+      <input disabled matInput [(value)]="tipoDescricao">
+    </mat-form-field>
+    <br>
+    <br>
+    <h3>Observações</h3>
+    <mat-form-field>
+      <!-- <mat-label>Observação do caso de requisito {{this.id}}</mat-label> -->
+      <input disabled matInput [(value)]="historico.observacoes">
+    </mat-form-field>
+  </div>
+
+  <div class="col">
+    <h2>User Story</h2>
+
+    Tema
+    <mat-form-field class="input-user-story">
+      <input disabled matInput [(value)]="historico.userStory.tema">
+    </mat-form-field>
+    <br>
+    Como
+    <mat-form-field class="input-user-story">
+      <!-- <mat-label>Ator desse User Story</mat-label> -->
+      <input disabled matInput [(value)]="historico.userStory.comoUm">
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+      <!-- <mat-label>Descrição da ação</mat-label> -->
+      <input disabled matInput [(value)]="historico.userStory.acao">
+    </mat-form-field>
+    <br>
+    Para que seja possível
+    <br>
+    <mat-form-field>
+      <!-- <mat-label>Descrição da funcionalidade</mat-label> -->
+      <input disabled matInput [(value)]="historico.userStory.paraQueSejaPossivel">
+    </mat-form-field>
+  </div>
+
+</mat-card>

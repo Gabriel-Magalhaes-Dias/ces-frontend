@@ -1,0 +1,39 @@
+.section {
+  display: flex;
+  align-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.checkboxes {
+  flex-wrap: wrap;
+}
+
+mat-form-field, mat-checkbox {
+  margin: 0 10px;
+}
+
+mat-checkbox {
+  margin-right: 30px;
+}
+
+.descritivo {
+  display: flex;
+  flex-direction: column;
+}
+
+.quarter-width {
+  width: 25%;
+}
+
+.half-width {
+  width: 48%;
+}
+
+.full-width {
+  width: 99%;
+}
+
+button {
+  margin-right: 30px
+}

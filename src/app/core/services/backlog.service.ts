@@ -7,17 +7,18 @@ import { environment } from 'src/environments/environment';
 })
 export class BacklogService {
 
-  private backlogUrl: string = `${environment.apiUrl}/backlog`
+  private backlogUrl: string = `${environment.apiUrl}/projetos`
+  private idProjeto = window.localStorage.getItem('idProjeto');
 
   constructor(private http: HttpClient) { }
 
-  public getBacklog(config: any): Observable<any> {
+  public getBacklog(id: number, config: any): Observable<any> {
     let params = new HttpParams();
 
     params = params.append('sprint', config.numeroSprint)
     params = params.append('nome', config.nomeRequisito)
 
-    return this.http.get<any>(this.backlogUrl, { params })
+    return this.http.get<any>(`${this.backlogUrl}/${this.idProjeto}/backlog`, { params })
   }
 
 }

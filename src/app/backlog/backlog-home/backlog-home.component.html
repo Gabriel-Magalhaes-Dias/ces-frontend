@@ -3,7 +3,7 @@
 <div class="buttons">
   <button mat-raised-button color="primary" [routerLink]="['/sprints']">Sprints</button>
 
-  <button mat-raised-button color="primary" [routerLink]="['/requisitos/novo']">Novo Requisito</button>
+  <button mat-raised-button color="primary" (click)="criarRequisito()">Novo Requisito</button>
 </div>
 
 <div class="actions">

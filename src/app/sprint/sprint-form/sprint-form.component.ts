@@ -41,7 +41,7 @@ export class SprintFormComponent implements OnInit {
   async ngOnInit() {
     this.titleService.setTitle(this.id ? 'Editar Sprint' : 'Nova Sprint');
     if (this.id) {
-      this.sprint = await  this.sprintService.get(this.id).toPromise();
+      this.sprint = await this.sprintService.get(this.id).toPromise();
       this.editSprint();
     }
     this.requisitos$ = this.requisitoService.getRequisitosByEstado('novo');
@@ -49,7 +49,9 @@ export class SprintFormComponent implements OnInit {
 
   editSprint() {
     this.sprintForm.patchValue({
-      ...this.sprint,
+      valorEntregueAoNegocio: this.sprint.valorEntregueAoNegocio,
+      dataInicio: new Date(this.sprint.dataInicio),
+      dataFim: new Date(this.sprint.dataFim),
     });
   }
 
@@ -76,7 +78,7 @@ export class SprintFormComponent implements OnInit {
         this.id ?
         this.sprintService.update(sprint)
           .subscribe(sprint => {
-            this.router.navigate(['/backlog'])
+            this.router.navigate(['/sprints'])
             this.notification.success('Sprint atualizada com sucesso')
           }, err => {
             console.log(err);
@@ -84,7 +86,7 @@ export class SprintFormComponent implements OnInit {
           }) :
         this.sprintService.create(sprint)
           .subscribe(sprint => {
-            this.router.navigate(['/backlog'])
+            this.router.navigate(['/sprints'])
             this.notification.success('Sprint criada com sucesso')
           }, err => {
             console.log(err);
@@ -95,20 +97,27 @@ export class SprintFormComponent implements OnInit {
   }
 
   setRequisitosSelecionados(requisitos: Requisito[]) {
-    console.log(requisitos);
     this.requisitosSelecionado = requisitos;
   }
 
   get valorEntregueAoNegocio() {
     return this.sprintForm.get('valorEntregueAoNegocio').value;
   }
+  
+  get dataInicio() {
+    console.log(this.sprintForm.get('dataInicio').value)
+    return this.sprintForm.get('dataInicio').value;
+  }
 
+  get dataFim() {
+    return this.sprintForm.get('dataFim').value;
+  }
 
   getSprint(): Sprint {
     return {
       id: +this.id,
-      dataInicio: new Date,
-      dataFim: new Date,
+      dataInicio: this.dataInicio,
+      dataFim: this.dataFim,   
       valorEntregueAoNegocio: this.valorEntregueAoNegocio,
       valorAprovadoCliente: false,
       entregas: this.requisitosSelecionado.map(req => {

@@ -1,0 +1,80 @@
+<h1>{{projeto.nome}}</h1>
+
+<mat-card>
+
+  <section class="section">
+    <mat-form-field class="half-width">
+      <mat-label>Nome</mat-label>
+      <input matInput [(value)]="projeto.nome" disabled>
+    </mat-form-field>
+
+    <mat-form-field class="quarter-width">
+      <mat-label>Data Início</mat-label>
+      <input matInput [matDatepicker]="dp1" [(value)]="projeto.dataInicio" disabled>
+      <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+      <mat-datepicker #dp1 disabled="false"></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="quarter-width">
+      <mat-label>Data Fim</mat-label>
+      <input matInput [matDatepicker]="dp2" [(value)]="projeto.dataFim" disabled>
+      <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+      <mat-datepicker #dp2 disabled="false"></mat-datepicker>
+    </mat-form-field>
+  </section>
+
+  <section class="section">
+    <mat-form-field class="full-width">
+      <mat-label>Descrição</mat-label>
+      <input matInput [(value)]="projeto.descricao" disabled>
+    </mat-form-field>
+  </section>
+
+  <br>
+
+  <section class="section">
+    <div class="checkboxes">
+      <mat-checkbox [checked]="projeto.realizaTestesAceitacao" disabled>Realiza testes de aceitação</mat-checkbox>
+
+      <mat-checkbox [checked]="projeto.clientePriorizaBacklog" disabled>Cliente prioriza backlog</mat-checkbox>
+
+      <mat-checkbox [checked]="projeto.utilizaPriorizacaoRequisitos" disabled>Utiliza priorização de requisitos
+      </mat-checkbox>
+
+      <mat-checkbox [checked]="projeto.utilizaModeloProprioRequisito" disabled>Utiliza modelo próprio de requisitos
+      </mat-checkbox>
+    </div>
+  </section>
+
+  <br>
+
+  <section class="descritivo">
+    <div>
+      <mat-form-field class="full-width">
+        <mat-label>Objetivos</mat-label>
+        <textarea matInput [(value)]="projeto.descritivoProjeto.objetivos" disabled></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Limitações</mat-label>
+        <textarea matInput [(value)]="projeto.descritivoProjeto.limitacoes" disabled></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Visão Geral</mat-label>
+        <textarea matInput [(value)]="projeto.descritivoProjeto.visaoGeral" disabled></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Funções do Produto</mat-label>
+        <textarea matInput [(value)]="projeto.descritivoProjeto.funcoesDoProduto" disabled></textarea>
+      </mat-form-field>
+    </div>
+  </section>
+
+  <button mat-raised-button color="warn" [routerLink]="['/projetos']">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="editar()">Editar</button>
+  <button mat-raised-button color="primary">Manter Equipe</button>
+  <button mat-raised-button color="accent" (click)="excluir()">Excluir</button>
+
+</mat-card>

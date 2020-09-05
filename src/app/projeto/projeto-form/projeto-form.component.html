@@ -1,0 +1,80 @@
+<h1> {{id? 'Editar Projeto' : 'Cadastrar Projeto'}}</h1>
+
+<form [formGroup]="projetoForm">
+  <mat-card>
+
+    <section class="section">
+      <mat-form-field class="half-width">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome">
+      </mat-form-field>
+
+      <mat-form-field class="quarter-width">
+        <mat-label>Data Início</mat-label>
+        <input matInput [matDatepicker]="dp1" formControlName="dataInicio">
+        <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+        <mat-datepicker #dp1 disabled="false"></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="quarter-width">
+        <mat-label>Data Fim</mat-label>
+        <input matInput [matDatepicker]="dp2" formControlName="dataFim">
+        <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+        <mat-datepicker #dp2 disabled="false"></mat-datepicker>
+      </mat-form-field>
+    </section>
+
+    <section class="section">
+      <mat-form-field class="full-width">
+        <mat-label>Descrição</mat-label>
+        <input matInput formControlName="descricao">
+      </mat-form-field>
+    </section>
+
+    <br>
+
+    <section class="section">
+      <div class="checkboxes">
+        <mat-checkbox formControlName="realizaTestesAceitacao">Realiza testes de aceitação</mat-checkbox>
+
+        <mat-checkbox formControlName="clientePriorizaBacklog">Cliente prioriza backlog</mat-checkbox>
+
+        <mat-checkbox formControlName="utilizaPriorizacaoRequisitos">Utiliza priorização de requisitos</mat-checkbox>
+
+        <mat-checkbox formControlName="utilizaModeloProprioRequisito">Utiliza modelo próprio de requisitos
+        </mat-checkbox>
+      </div>
+    </section>
+
+    <br>
+
+    <section class="descritivo">
+      <div formGroupName="descritivoProjeto">
+        <mat-form-field class="full-width">
+          <mat-label>Objetivos</mat-label>
+          <textarea matInput formControlName="objetivos"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Limitações</mat-label>
+          <textarea matInput formControlName="limitacoes"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Visão Geral</mat-label>
+          <textarea matInput formControlName="visaoGeral"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Funções do Produto</mat-label>
+          <textarea matInput formControlName="funcoesDoProduto"></textarea>
+        </mat-form-field>
+      </div>
+    </section>
+
+    <button mat-raised-button color="warn" [routerLink]="['/projetos']">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="cadastrar()"
+      [disabled]="!projetoForm.valid">{{id ? 'Editar' : 'Criar'}}</button>
+
+  </mat-card>
+</form>

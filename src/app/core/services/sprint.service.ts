@@ -8,23 +8,34 @@ import { Sprint } from '../../shared/models/sprint';
   providedIn: 'root',
 })
 export class SprintService {
-  private sprintUrl = `${environment.apiUrl}/sprints`;
 
-  constructor(private http: HttpClient) {}
+  private projetoUrl: string = `${environment.apiUrl}/projetos`
+
+  constructor(
+    private http: HttpClient,
+  ) { }
 
   create(sprint: Sprint): Observable<Sprint> {
-    return this.http.post<Sprint>(this.sprintUrl, sprint);
+    const idProjeto = window.localStorage.getItem('idProjeto');
+    const sprintUrl = `${this.projetoUrl}/${idProjeto}/sprints`
+    return this.http.post<Sprint>(sprintUrl, sprint);
   }
 
   update(sprint: Sprint): Observable<Sprint> {
-    return this.http.put<Sprint>(`${this.sprintUrl}/${sprint.id}`, sprint);
+    const idProjeto = window.localStorage.getItem('idProjeto');
+    const sprintUrl = `${this.projetoUrl}/${idProjeto}/sprints`
+    return this.http.put<Sprint>(`${sprintUrl}/${sprint.id}`, sprint);
   }
 
   get(id: string): Observable<Sprint> {
-    return this.http.get<Sprint>(`${this.sprintUrl}/${id}`);
+    const idProjeto = window.localStorage.getItem('idProjeto');
+    const sprintUrl = `${this.projetoUrl}/${idProjeto}/sprints`
+    return this.http.get<Sprint>(`${sprintUrl}/${id}`);
   }
 
   getSprints(): Observable<Sprint[]> {
-    return this.http.get<Sprint[]>(`${this.sprintUrl}`);
+    const idProjeto = window.localStorage.getItem('idProjeto');
+    const sprintUrl = `${this.projetoUrl}/${idProjeto}/sprints`
+    return this.http.get<Sprint[]>(`${sprintUrl}`);
   }
 }

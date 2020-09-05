@@ -1,0 +1,93 @@
+<h1 class="mat-headline">Histórico do Requisito {{idRequisito}}</h1>
+
+<div class="buttons">
+  <button mat-raised-button color="warn" (click)="voltar()"[routerLink]="['projetos/'+this.idProjeto+'/requisitos/info/'+this.idRequisito]">Voltar</button>
+</div>
+
+<div class="actions">
+
+  <form [formGroup]="filtrosListagem">
+    <div class="actions-item search">
+      Filtrar:
+
+      <mat-form-field class="search-item">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="estado">
+          <mat-option value="">Todos</mat-option>
+          <mat-option value="novo">Novo</mat-option>
+          <mat-option value="verificado">Verificado</mat-option>
+          <mat-option value="andamento">Em andamento</mat-option>
+          <mat-option value="concluido">Concluído</mat-option>
+          <mat-option value="entregue">Entregue</mat-option>
+          <mat-option value="removido">Removido</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="search-item">
+        <mat-label>Versão</mat-label>
+        <mat-select formControlName="versao">
+          <mat-option value="0">Todas</mat-option>
+          <mat-option *ngFor="let versao of total" [(value)]="versao.versao">{{versao.versao}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="search-item">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome">
+      </mat-form-field>
+    </div>
+
+  
+
+    <div class="actions-item">
+      Ordenar por:
+      <mat-form-field class="search-item">
+        <mat-label>Escolha uma opção</mat-label>
+        <mat-select formControlName="ordenarPor">
+          <mat-option value="nome">Nome</mat-option>
+          <mat-option value="prioridade">Prioridade</mat-option>
+          <mat-option value="estimativa">Estimativa</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+
+<mat-card *ngFor="let versao of historico" (click)="exibirVersao(versao.versao)">
+    <mat-card-header>
+        <mat-card-title>
+            {{versao.nome}}
+            <span class="subtitle"> - Versão: {{ versao.versao }}</span>
+          </mat-card-title>
+    </mat-card-header>
+    <mat-card-content style="margin-left: 15px" class="card">
+        <div class="col">
+          <p>
+            Prioridade: {{ versao.prioridade }}
+          </p>
+        </div>
+        <div class="col">
+          <p>
+            Idade: {{ versao.idade }} dia(s)
+          </p>
+        </div>
+        <div class="col">
+          <p>
+            Estimativa: {{ versao.estimativa }}
+          </p>
+        </div>
+        <div class="col">
+          <p>
+            Autor: {{ versao.autor }}
+          </p>
+        </div>
+        <div class="col">
+          <p>
+            Estado: {{versao.estado}}
+          </p>
+        </div>
+        <div class="col action">
+            <button mat-raised-button color="warn">Reverter</button>
+          </div>
+    </mat-card-content>
+</mat-card>

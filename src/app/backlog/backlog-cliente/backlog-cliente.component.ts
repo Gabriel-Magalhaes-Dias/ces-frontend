@@ -12,6 +12,8 @@ import { BacklogService } from 'src/app/core/services/backlog.service';
 })
 export class BacklogClienteComponent implements OnInit {
 
+  idProjeto = window.localStorage.getItem('idProjeto');
+
   config = {
     numeroSprint: "",
     nomeRequisito: ""
@@ -53,7 +55,7 @@ export class BacklogClienteComponent implements OnInit {
   }
 
   listarRequisitos(): void {
-    this.backlogService.getBacklog(this.config).subscribe((requisitos: any) => {
+    this.backlogService.getBacklog(+this.idProjeto ,this.config).subscribe((requisitos: any) => {
       this.requisitos = requisitos
     })
   }

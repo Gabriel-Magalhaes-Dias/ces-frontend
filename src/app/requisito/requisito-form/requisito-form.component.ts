@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/auth/auth.service';
 import { RequisitoService } from 'src/app/core/services/requisito.service';
 import { ConfirmDialogComponent, DialogData } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { Requisito } from 'src/app/shared/models/requisito';
@@ -10,13 +11,14 @@ import { NotificationService } from '../../core/services/notification.service';
 import { UserStory } from './../../shared/models/userStory';
 
 export interface RequisitoData {
-  nome: string
-  observacoes: string
+  nome: string;
+  observacoes: string;
+  autor: string;
   userStory: {
-    comoUm: string
-    acao: string
-    paraQueSejaPossivel: string
-    tema: string
+    comoUm: string;
+    acao: string;
+    paraQueSejaPossivel: string;
+    tema: string;
   }
 }
 
@@ -43,18 +45,21 @@ export class RequisitoFormComponent implements OnInit {
   acaoOption: string;
   tipoDescricao = 'user_story';
   id: number;
+  idProjeto: number
   editarRequisito: boolean;
 
   constructor(private dialog: MatDialog, private notification: NotificationService, private fb: FormBuilder,
-    private router: Router, private activatedRoute: ActivatedRoute, private titleService: Title, private requisitoService: RequisitoService) { }
+    private router: Router, private activatedRoute: ActivatedRoute, private titleService: Title, private requisitoService: RequisitoService, private authService: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.idProjeto = parseInt(this.activatedRoute.parent.parent.snapshot.paramMap.get('idProjeto'));
     this.id = this.activatedRoute.snapshot.params['id'];
+    
 
     if (this.id) {
       this.editarRequisito = true;
       this.titleService.setTitle('Atualizar Requisito');
-      this.requisitoService.get(this.id)
+      this.requisitoService.get(this.idProjeto, this.id)
         .subscribe((requisito: Requisito) => (this.updateRequisito(requisito)));
     } else {
       this.titleService.setTitle('Novo Requisito');
@@ -67,7 +72,6 @@ export class RequisitoFormComponent implements OnInit {
   }
 
   cadastrar(): void {
-    console.log(this.requisitoForm.value as RequisitoData)
     const config = {
       data: {
         title: 'Salvar alterações',
@@ -79,12 +83,13 @@ export class RequisitoFormComponent implements OnInit {
       if (opcao) {
         this.requisito = this.requisitoForm.value as RequisitoData;
 
+        this.requisito.userStory.acao = this.acaoOption.concat(this.requisito.userStory.acao);
         if (this.editarRequisito) {
-          this.requisitoService.alterar(this.requisito, this.id).subscribe(() => this.notification.success('Requisito atualizado com sucesso'));
+          this.requisitoService.alterar(this.idProjeto, this.requisito, this.id).subscribe(() => this.notification.success('Requisito atualizado com sucesso'));
         } else {
-          this.requisitoService.salvar(this.requisito).subscribe(() => this.notification.success('Requisito criado com sucesso'));
+          this.requisitoService.salvar(this.idProjeto, this.requisito).subscribe(() => this.notification.success('Requisito criado com sucesso'));
         }
-        this.router.navigate(['/backlog'])
+        this.router.navigate(['/backlog/'+this.idProjeto]);
       }
     })
   }

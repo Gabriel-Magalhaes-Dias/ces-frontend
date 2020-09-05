@@ -43,7 +43,7 @@ export class AuthenticationService {
   }
 
   register(user: User): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/user/usuarios`, {
+    return this.http.post(`${environment.apiUrl}/admin/usuarios`, {
       nome: user.nome,
       username: user.username,
       enabled: user.enabled,
