@@ -1,3 +1,7 @@
+interface Role {
+    name: string;
+}
+
 export interface User {
     id?: number;
     nome: string;
@@ -5,7 +9,7 @@ export interface User {
     email: string;
     enabled: boolean;
     password: string;
-    roles?: string[];
+    roles?: Role[];
     isAdmin?: User;
     authenticationToken?: string;
     refreshToken?: string;

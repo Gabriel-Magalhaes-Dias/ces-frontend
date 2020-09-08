@@ -1,74 +1,62 @@
 <mat-sidenav-container class="container">
-  <mat-sidenav
-    *ngIf="isLoggedIn"
-    #drawer
-    class="sidenav"
-    fixedInViewport
-    fixedTopGap="64"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false"
-  >
+  <mat-sidenav *ngIf="isLoggedIn" #drawer class="sidenav" fixedInViewport fixedTopGap="64"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false">
     <mat-nav-list>
-      <h3 mat-subheader>Membro da Equipe</h3>
-      <a mat-list-item [routerLink]="['/projetos']" routerLinkActive="active">
-        <mat-icon mat-list-icon>
-          developer_board
-        </mat-icon>
-        <p mat-line>Projetos</p>
-      </a>
-      <a mat-list-item [routerLink]="['/backlog']" routerLinkActive="active">
-        <mat-icon mat-list-icon>
-          table_chart
-        </mat-icon>
-        <p mat-line>Backlog</p>
-      </a>
-      <a mat-list-item [routerLink]="['/sprints']" routerLinkActive="active">
-        <mat-icon mat-list-icon>
-          rotate_right
-        </mat-icon>
-        <p mat-line>Sprints</p>
-      </a>
-      <a
-        mat-list-item
-        [routerLink]="['/fluxo-trabalho']"
-        routerLinkActive="active"
-      >
-        <mat-icon mat-list-icon>
-          analytics
-        </mat-icon>
-        <p mat-line>Fluxo de Trabalho</p>
-      </a>
 
-      <h3 mat-subheader>Administrador</h3>
-      <a
-        mat-list-item
-        [routerLink]="['/administradores']"
-        routerLinkActive="active"
-      >
-        <mat-icon mat-list-icon>
-          supervisor_account
-        </mat-icon>
-        <p mat-line>Administradores</p>
-      </a>
-      <a mat-list-item [routerLink]="['/usuarios']" routerLinkActive="active">
-        <mat-icon mat-list-icon>
-          people
-        </mat-icon>
-        <p mat-line>Usuários</p>
-      </a>
+      <div *ngIf="getPermision('ROLE_USUARIO')">
+        <h3 mat-subheader>Membro da Equipe</h3>
+        <a mat-list-item [routerLink]="['/projetos']" routerLinkActive="active">
+          <mat-icon mat-list-icon>
+            developer_board
+          </mat-icon>
+          <p mat-line>Projetos</p>
+        </a>
+        <a mat-list-item [routerLink]="['/backlog']" routerLinkActive="active">
+          <mat-icon mat-list-icon>
+            table_chart
+          </mat-icon>
+          <p mat-line>Backlog</p>
+        </a>
+        <a mat-list-item [routerLink]="['/sprints']" routerLinkActive="active">
+          <mat-icon mat-list-icon>
+            rotate_right
+          </mat-icon>
+          <p mat-line>Sprints</p>
+        </a>
+        <a mat-list-item [routerLink]="['/fluxo-trabalho']" routerLinkActive="active">
+          <mat-icon mat-list-icon>
+            analytics
+          </mat-icon>
+          <p mat-line>Fluxo de Trabalho</p>
+        </a>
+      </div>
 
-      <h3 mat-subheader>Cliente</h3>
-      <a
-        mat-list-item
-        [routerLink]="['/backlog/cliente']"
-        routerLinkActive="active"
-      >
-        <mat-icon mat-list-icon>
-          table_chart
-        </mat-icon>
-        <p mat-line>Visualizar Backlog</p>
-      </a>
+      <div *ngIf="getPermision('ROLE_ADMINISTRADOR')">
+        <h3 mat-subheader>Administrador</h3>
+        <a mat-list-item [routerLink]="['/administradores']" routerLinkActive="active">
+          <mat-icon mat-list-icon>
+            supervisor_account
+          </mat-icon>
+          <p mat-line>Administradores</p>
+        </a>
+        <a mat-list-item [routerLink]="['/usuarios']" routerLinkActive="active">
+          <mat-icon mat-list-icon>
+            people
+          </mat-icon>
+          <p mat-line>Usuários</p>
+        </a>
+      </div>
+
+      <div *ngIf="getPermision('ROLE_USUARIO')">
+        <h3 mat-subheader>Cliente</h3>
+        <a mat-list-item [routerLink]="['/backlog/cliente']" routerLinkActive="active">
+          <mat-icon mat-list-icon>
+            table_chart
+          </mat-icon>
+          <p mat-line>Visualizar Backlog</p>
+        </a>
+      </div>
 
       <!--
                 <a id="push-bottom" mat-list-item>

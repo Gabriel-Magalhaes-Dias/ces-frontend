@@ -37,10 +37,8 @@ export class NavComponent implements OnInit {
     this.authService.user.subscribe(user => {
       this.user = user;
       this.isLoggedIn = !!user;
-
-      if (this.isLoggedIn) {
+      if (this.isLoggedIn) {  
         this.getUsuario(user.id).then(() => {
-
         });
       }
 
@@ -51,6 +49,10 @@ export class NavComponent implements OnInit {
 
   async getUsuario(id: number) {
 
+  }
+
+  getPermision(value: string) {
+    return this.user.roles.find(role => role.name === value);
   }
 
   handleLogout() {
