@@ -18,7 +18,7 @@ export class BacklogService {
     params = params.append('sprint', config.numeroSprint)
     params = params.append('nome', config.nomeRequisito)
 
-    return this.http.get<any>(`${this.backlogUrl}/${this.idProjeto}/backlog`, { params })
+    return this.http.get<any>(`${this.backlogUrl}/${window.localStorage.getItem('idProjeto')}/backlog`, { params })
   }
 
 }

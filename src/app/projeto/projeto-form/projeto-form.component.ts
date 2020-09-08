@@ -56,7 +56,6 @@ export class ProjetoFormComponent implements OnInit {
   }
 
   cadastrar(): void {
-    console.log(this.projetoForm.value as Projeto)
     const config = {
       data: {
         title: 'Salvar alterações',

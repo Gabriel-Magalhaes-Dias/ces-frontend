@@ -53,7 +53,6 @@ export class RequisitoPriorizarComponent implements OnInit {
     this.titleService.setTitle('Informações do Requisito');
     this.id = parseInt(this.routeEntrada.snapshot.paramMap.get('id'));
     this.idProjeto = parseInt(this.routeEntrada.parent.snapshot.paramMap.get('idProjeto'));
-    console.log(this.idProjeto);
     this.requisitoSevice.get(this.idProjeto, this.id).subscribe(requisito => { this.requisito = requisito; this.userStory = requisito.userStory });
   }
 

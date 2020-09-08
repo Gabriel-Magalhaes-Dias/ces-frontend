@@ -105,7 +105,6 @@ export class SprintFormComponent implements OnInit {
   }
   
   get dataInicio() {
-    console.log(this.sprintForm.get('dataInicio').value)
     return this.sprintForm.get('dataInicio').value;
   }
 

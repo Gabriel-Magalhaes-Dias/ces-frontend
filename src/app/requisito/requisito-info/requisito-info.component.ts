@@ -52,7 +52,7 @@ export class RequisitoInfoComponent implements OnInit {
     dialogRef.afterClosed().subscribe((opcao: boolean) => {
       if (opcao) {
         this.requisitoSevice.deletar(this.idProjeto, this.id).subscribe();
-        this.router.navigate(['/backlog/'+this.idProjeto]);
+        this.router.navigate(['/backlog']);
         this.notification.success('Requisito excluido com sucesso');
       }
     })

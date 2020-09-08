@@ -44,7 +44,7 @@ export class RequisitoEstimarComponent implements OnInit {
   estimar(): void {
     this.requisitoService.estimar(this.idProjeto, this.id, this.estimarForm.value as Estimativa).subscribe(() => {
       this.notification.success('Requisito estimado com sucesso');
-      this.router.navigate(['/backlog/'+this.idProjeto]);
+      this.voltar();
     },
       () => this.notification.error('Erro ao estimar o requisito'));
   }
@@ -53,7 +53,6 @@ export class RequisitoEstimarComponent implements OnInit {
     this.titleService.setTitle('Informações do Requisito');
     this.id = parseInt(this.routeEntrada.snapshot.paramMap.get('id'));
     this.idProjeto = parseInt(this.routeEntrada.parent.snapshot.paramMap.get('idProjeto'));
-    console.log(this.idProjeto)
     this.requisitoSevice.get(this.idProjeto, this.id).subscribe(requisito => { this.requisito = requisito; this.userStory = requisito.userStory });
   }
 

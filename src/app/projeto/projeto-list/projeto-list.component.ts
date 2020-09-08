@@ -40,7 +40,7 @@ export class ProjetoListComponent implements OnInit {
   openBacklog(id: number): void {
     environment.projetoSelecionado = id;
     this.storageService.setIdProjeto(id);
-    this.router.navigateByUrl('/backlog/' + id);
+    this.router.navigateByUrl('/backlog');
   }
 
   openProjetoDetails(id: number): void {

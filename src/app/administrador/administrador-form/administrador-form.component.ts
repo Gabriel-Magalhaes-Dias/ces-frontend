@@ -66,7 +66,6 @@ export class AdministradorFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.administradorForm)
     this.cadastrar()
   }
 

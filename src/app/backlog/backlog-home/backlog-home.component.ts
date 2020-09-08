@@ -33,6 +33,7 @@ export class BacklogHomeComponent implements OnInit {
     private router: Router, private titleService: Title) { }
 
   ngOnInit(): void {
+
     this.titleService.setTitle('Backlog')
 
     this.filtrosListagem = this.fb.group({
@@ -62,7 +63,7 @@ export class BacklogHomeComponent implements OnInit {
   }
 
   openRequisitoDetails(id: number): void {
-    this.router.navigateByUrl('/requisitos/info/' + id);
+    this.router.navigateByUrl('/projetos/' + window.localStorage.getItem('idProjeto') + '/requisitos/info/' + id);
   }
 
   resetarConsulta(): void {
