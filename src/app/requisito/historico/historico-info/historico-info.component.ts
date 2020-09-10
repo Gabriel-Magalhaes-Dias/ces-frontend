@@ -40,7 +40,7 @@ export class HistoricoInfoComponent implements OnInit {
     this.idRequisito = parseInt(this.routerEntrada.snapshot.paramMap.get('idRequisito'));
     this.idVersao = parseInt(this.routerEntrada.snapshot.paramMap.get('idVersao'));
   
-    this.requisitoService.getVersao(this.idProjeto, this.idRequisito, this.idVersao).subscribe((historico) => { this.historico = historico; this.definirDescricao(historico) });
+    this.requisitoService.getVersao(this.idRequisito, this.idVersao).subscribe((historico) => { this.historico = historico; this.definirDescricao(historico) });
 
   }
 

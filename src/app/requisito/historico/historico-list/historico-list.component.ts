@@ -46,16 +46,16 @@ export class HistoricoListComponent implements OnInit {
     this.idProjeto = parseInt(this.routeEntrada.parent.snapshot.paramMap.get('idProjeto'));
     this.idRequisito = parseInt(this.routeEntrada.snapshot.params['id']);
 
-    this.requisitoService.getHistoricoFiltro(this.idProjeto, this.idRequisito, this.config).subscribe((historico) => { this.historico = historico; this.total = historico });
+    this.requisitoService.getHistoricoFiltro(this.idRequisito, this.config).subscribe((historico) => { this.historico = historico; this.total = historico });
 
 
     this.filtrosListagem.get('versao').valueChanges.subscribe((val: number) => {
       this.historico = [];
       if (val == 0) {
-        this.requisitoService.getHistorico(this.idProjeto, this.idRequisito).subscribe((historico) => { this.historico = historico; this.total = historico });
+        this.requisitoService.getHistorico(this.idRequisito).subscribe((historico) => { this.historico = historico; this.total = historico });
       } else {
-        this.requisitoService.getVersao(this.idProjeto, this.idRequisito, val).subscribe((versao) => { this.historico.push(versao); });
-        this.requisitoService.getHistorico(this.idProjeto, this.idRequisito).subscribe((historico) => { this.total = historico });
+        this.requisitoService.getVersao(this.idRequisito, val).subscribe((versao) => { this.historico.push(versao); });
+        this.requisitoService.getHistorico(this.idRequisito).subscribe((historico) => { this.total = historico });
       }
     });
 
@@ -83,7 +83,7 @@ export class HistoricoListComponent implements OnInit {
   }
 
   listarVersoes(): void {
-    this.requisitoService.getHistoricoFiltro(this.idProjeto, this.idRequisito, this.config).subscribe((historico) => { this.historico = historico; });
+    this.requisitoService.getHistoricoFiltro(this.idRequisito, this.config).subscribe((historico) => { this.historico = historico; });
   }
 
   resetarConsulta(): void {

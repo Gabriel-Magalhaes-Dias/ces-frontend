@@ -1,3 +1,4 @@
+import { BacklogService } from 'src/app/core/services/backlog.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
@@ -33,6 +34,7 @@ export class SprintFormComponent implements OnInit {
     private titleService: Title,
     private requisitoService: RequisitoService,
     private sprintService: SprintService,
+    private backlogService: BacklogService
   ) {
     this.id = this.activatedRoute.snapshot.params['id'];
     this.createForm();
@@ -44,7 +46,7 @@ export class SprintFormComponent implements OnInit {
       this.sprint = await this.sprintService.get(this.id).toPromise();
       this.editSprint();
     }
-    this.requisitos$ = this.requisitoService.getRequisitosByEstado('novo');
+    this.requisitos$ = this.backlogService.getBacklog(parseInt(window.localStorage.getItem('idProjeto')), {numeroSprint: '', nomeRequisito: '', estado: 'novo'});
   }
 
   editSprint() {

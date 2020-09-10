@@ -15,13 +15,14 @@ export class BacklogHomeComponent implements OnInit {
 
   config = {
     numeroSprint: "",
-    nomeRequisito: ""
+    nomeRequisito: "",
+    estado: ""
   }
 
   idProjeto = environment.projetoSelecionado;
 
   filtrosListagem = new FormGroup({
-    estado: new FormControl(),
+    estado: new FormControl(''),
     sprint: new FormControl(),
     nome: new FormControl('')
   })

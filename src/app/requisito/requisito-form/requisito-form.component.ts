@@ -55,11 +55,10 @@ export class RequisitoFormComponent implements OnInit {
     this.idProjeto = parseInt(this.activatedRoute.parent.parent.snapshot.paramMap.get('idProjeto'));
     this.id = this.activatedRoute.snapshot.params['id'];
     
-
     if (this.id) {
       this.editarRequisito = true;
       this.titleService.setTitle('Atualizar Requisito');
-      this.requisitoService.get(this.idProjeto, this.id)
+      this.requisitoService.get(this.id)
         .subscribe((requisito: Requisito) => (this.updateRequisito(requisito)));
     } else {
       this.titleService.setTitle('Novo Requisito');
@@ -85,9 +84,9 @@ export class RequisitoFormComponent implements OnInit {
 
         this.requisito.userStory.acao = this.acaoOption.concat(this.requisito.userStory.acao);
         if (this.editarRequisito) {
-          this.requisitoService.alterar(this.idProjeto, this.requisito, this.id).subscribe(() => this.notification.success('Requisito atualizado com sucesso'));
+          this.requisitoService.alterar(this.requisito, this.id).subscribe(() => this.notification.success('Requisito atualizado com sucesso'));
         } else {
-          this.requisitoService.salvar(this.idProjeto, this.requisito).subscribe(() => this.notification.success('Requisito criado com sucesso'));
+          this.requisitoService.salvar(this.requisito).subscribe(() => this.notification.success('Requisito criado com sucesso'));
         }
         this.router.navigate(['/backlog/'+this.idProjeto]);
       }

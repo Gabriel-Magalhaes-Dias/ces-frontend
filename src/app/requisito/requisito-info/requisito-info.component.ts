@@ -37,7 +37,7 @@ export class RequisitoInfoComponent implements OnInit {
     this.titleService.setTitle('Informações do Requisito');
     this.id = parseInt(this.routeEntrada.snapshot.paramMap.get('id'));
     this.idProjeto = parseInt(this.routeEntrada.parent.snapshot.paramMap.get('idProjeto'));
-    this.requisitoSevice.get(this.idProjeto, this.id).subscribe((requisito: Requisito) => { this.requisito = requisito; this.userStory = requisito.userStory; this.definirDescricao(requisito); });
+    this.requisitoSevice.get(this.id).subscribe((requisito: Requisito) => { this.requisito = requisito; this.userStory = requisito.userStory; this.definirDescricao(requisito); });
 
   }
 
@@ -51,7 +51,7 @@ export class RequisitoInfoComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, config)
     dialogRef.afterClosed().subscribe((opcao: boolean) => {
       if (opcao) {
-        this.requisitoSevice.deletar(this.idProjeto, this.id).subscribe();
+        this.requisitoSevice.deletar(this.id).subscribe();
         this.router.navigate(['/backlog']);
         this.notification.success('Requisito excluido com sucesso');
       }
